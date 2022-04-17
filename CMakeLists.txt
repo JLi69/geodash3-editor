@@ -11,6 +11,11 @@ add_executable(
 	#Files to compile
 	${PROJECT_SOURCE_DIR}/Main.cpp
 	${PROJECT_SOURCE_DIR}/glad.c
+
+	#OpenGL utilities
+	${PROJECT_SOURCE_DIR}/src/GL-Utils/Shader.cpp
+	${PROJECT_SOURCE_DIR}/src/GL-Utils/VertexBufferObj.cpp
+	${PROJECT_SOURCE_DIR}/src/GL-Utils/GetOpenGLError.cpp
 )
 
 #Libraries to link with the project

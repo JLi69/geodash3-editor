@@ -3,26 +3,13 @@
 #include "src/GL-Utils/Shader.h"
 #include "src/GL-Utils/VertexBufferObj.h"
 #include "src/GL-Utils/GetOpenGLError.h"
+#include "src/Init/init.h"
 
 int main()
 {
-	//Initialize glfw
-	if(!glfwInit())
-		return -1;	
-
 	//Initialize the window
-	GLFWwindow* glWindow;
-	glWindow = glfwCreateWindow(1920, 1080, "Geodash 3D", NULL, NULL);
-	if(!glWindow)
-	{
-		glfwTerminate();
-		return -1;
-	}
-	glfwMakeContextCurrent(glWindow);
-
-	//Initialize glad
-	if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		return -1;
+	GLFWwindow *glWindow;
+	Geodash3::init(glWindow, "Geodash 3D");
 
 	//Test triangle
 	float testtri[6] = 

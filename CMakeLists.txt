@@ -16,6 +16,9 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/GL-Utils/Shader.cpp
 	${PROJECT_SOURCE_DIR}/src/GL-Utils/VertexBufferObj.cpp
 	${PROJECT_SOURCE_DIR}/src/GL-Utils/GetOpenGLError.cpp
+
+	#init
+	${PROJECT_SOURCE_DIR}/src/Init/init.cpp
 )
 
 #Libraries to link with the project

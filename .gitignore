@@ -1,0 +1,10 @@
+Makefile
+geodash3
+*.cmake
+
+#ignore all txt files
+*.txt
+#except for CMakeLists.txt
+!CMakeLists.txt
+
+CMakeFiles

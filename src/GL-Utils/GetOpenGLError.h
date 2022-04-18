@@ -1,4 +1,6 @@
+#ifndef INCLUDE_GLAD
 #include <glad/glad.h>
+#endif
 
 #define GL_CALL(x) x; checkOpenGLError()
 

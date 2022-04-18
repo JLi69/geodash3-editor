@@ -1,5 +1,4 @@
 #include "GetOpenGLError.h"
-#include <glad/glad.h>
 #include <iostream>
 
 bool checkOpenGLError()

@@ -19,6 +19,10 @@ add_executable(
 
 	#init
 	${PROJECT_SOURCE_DIR}/src/Init/init.cpp
+
+	#Engine
+	${PROJECT_SOURCE_DIR}/src/Engine.cpp
+	${PROJECT_SOURCE_DIR}/src/EngineDisplay.cpp
 )
 
 #Libraries to link with the project

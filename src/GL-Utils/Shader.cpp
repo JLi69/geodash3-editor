@@ -2,7 +2,9 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#ifndef INCLUDE_GLAD
 #include <glad/glad.h>
+#endif
 
 unsigned int Shader::GetId()
 {

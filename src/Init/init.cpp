@@ -2,12 +2,7 @@
 #include "init.h"
 #include <cstdlib>
 
-void Geodash3::onWindowResize(GLFWwindow *win, int newWidth, int newHeight)
-{
-	glViewport(0, 0, newWidth, newHeight);
-}
-
-void Geodash3::init(GLFWwindow *&win, const char *title)
+void Geodash3::init(GLFWwindow *&win, const char *title, GLFWwindowsizefun onWindowResize)
 {
 	if(!glfwInit())
 		exit(-1);
@@ -20,7 +15,7 @@ void Geodash3::init(GLFWwindow *&win, const char *title)
 	}
 	glfwMakeContextCurrent(win);
 
-	glfwSetWindowSizeCallback(win, Geodash3::onWindowResize);
+	glfwSetWindowSizeCallback(win, onWindowResize);
 
 	//Initialize glad
 	if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

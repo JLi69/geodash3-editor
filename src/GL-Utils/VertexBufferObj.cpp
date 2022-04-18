@@ -1,5 +1,7 @@
 #include "VertexBufferObj.h"
+#ifndef INCLUDE_GLAD
 #include <glad/glad.h>
+#endif
 
 void VertexBufferObj::Bind()
 {

@@ -1,5 +1,3 @@
-#include <array>
-
 class VertexBufferObj
 {
 	unsigned int id;

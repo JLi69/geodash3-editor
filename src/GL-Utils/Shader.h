@@ -29,6 +29,6 @@ public:
 	//Get the location of a uniform in the program
 	int GetUniformLocation(std::string uniformName);
 
-	//Constructor
-	Shader(std::string vertShaderPath, std::string fragShaderPath);
+	//Create a shader
+	void CreateShader(std::string vertShaderPath, std::string fragShaderPath);
 };

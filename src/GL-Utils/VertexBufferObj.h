@@ -13,8 +13,8 @@ public:
 	unsigned int GetId();
 
 	//Sends data to the buffer
-	void Data(float *dat, int size, int vSize);
+	void Data(const float *dat, int size, int vSize);
 
-	//Constructor
-	VertexBufferObj();
+	//Generate the buffer
+	void GenBuffer();
 };

@@ -2,56 +2,30 @@
 
 //Main loop
 void Geodash3::Engine::Run()
-{
-	//Test triangle
-	float testcube[108] = 
-	{
-		 -1.0f, 1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, -1.0f, 1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 1.0f, -1.0f,
-		 1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, -1.0f,
-		 1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		 -1.0f, -1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		 -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, 1.0f,
-		 -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f,
-		 -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f,
-		 -1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 1.0f,
-		 1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, -1.0f
-	};
+{		
+	GL_CALL(m_cube.Enable());
 
-	GL_CALL(VertexBufferObj vbo = VertexBufferObj());
-	GL_CALL(vbo.Data(testcube, sizeof(testcube), 3));
-	GL_CALL(vbo.Enable());
-
-	GL_CALL(Shader sh = Shader("res/shaders/vert-3d.glsl", "res/shaders/basic-frag.glsl"));
-	GL_CALL(glUseProgram(sh.GetId()));
-	GL_CALL(int loc = sh.GetUniformLocation("u_Color"));
-	GL_CALL(int pLoc = sh.GetUniformLocation("u_PerspectiveMat"));
-	GL_CALL(int mvLoc = sh.GetUniformLocation("u_ModelViewMat"));
+	GL_CALL(glUseProgram(m_basic3D.GetId()));
+	GL_CALL(int loc = m_basic3D.GetUniformLocation("u_Color"));
+	GL_CALL(int pLoc = m_basic3D.GetUniformLocation("u_PerspectiveMat"));
+	GL_CALL(int mvLoc = m_basic3D.GetUniformLocation("u_ModelViewMat"));
 
 	GL_CALL(glUniform4f(loc, 0.0f, 1.0f, 0.0f, 1.0f));
-	GL_CALL(glUniformMatrix4fv(pLoc, 1, false, glm::value_ptr(perspectiveMat)));
+	GL_CALL(glUniformMatrix4fv(pLoc, 1, false, glm::value_ptr(m_perspectiveMat)));
 	
-	glm::mat4 mv = rotationMatrix * viewMatrix * glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -1.5f, -6.0f));
+	glm::mat4 mv = m_rotationMatrix * m_viewMatrix * glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -3.0f, -6.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(4.0f, 1.0f, 1000.0f));
 
 	GL_CALL(glUniformMatrix4fv(mvLoc, 1, false, glm::value_ptr(mv)));
 
+	//Set the background color of the window
 	GL_CALL(glClearColor(0.0f, 0.8f, 1.0f, 1.0f));
-
+	//Enable the depth test
 	GL_CALL(glEnable(GL_DEPTH_TEST));
 	GL_CALL(glDepthFunc(GL_LEQUAL));
 
-	float theta = 0.0f;
-
-	while(!glfwWindowShouldClose(gameWindow))
+	while(!glfwWindowShouldClose(m_gameWindow))
 	{
-		this->Display();
-
-		theta -= 1.0f;
-		rotationMatrix = glm::rotate(glm::mat4(1.0f), theta * 3.14159f / 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-		mv = rotationMatrix * viewMatrix * glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -1.5f, -6.0f));
-		GL_CALL(glUniformMatrix4fv(mvLoc, 1, false, glm::value_ptr(mv)));
+		this->m_Display();
 	}
 
 	glfwTerminate();
@@ -67,5 +41,12 @@ Geodash3::Engine::Engine()
 	};
 
 	//Initialize everything
-	Geodash3::init(this->gameWindow, "Geodash 3D", onWinResizeFunc);
+	Geodash3::init(this->m_gameWindow, "Geodash 3D", onWinResizeFunc);
+
+	//Set up the vertex buffers
+	GL_CALL(m_cube.GenBuffer());
+	GL_CALL(m_cube.Data(&Geodash3::cubeVerts[0], sizeof(Geodash3::cubeVerts), 3));
+
+	//Set up the shaders
+	m_basic3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/basic-frag.glsl");
 }

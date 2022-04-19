@@ -14,7 +14,7 @@ void VertexBufferObj::Enable()
 	glEnableVertexAttribArray(0);
 }
 
-void VertexBufferObj::Data(float *dat, int size, int vSize)
+void VertexBufferObj::Data(const float *dat, int size, int vSize)
 {
 	this->Bind();
 	glBufferData(GL_ARRAY_BUFFER, size, dat, GL_STATIC_DRAW);
@@ -26,7 +26,7 @@ unsigned int VertexBufferObj::GetId()
 	return this->id;
 }
 
-VertexBufferObj::VertexBufferObj()
+void VertexBufferObj::GenBuffer()
 {
 	glGenBuffers(1, &this->id);
 }

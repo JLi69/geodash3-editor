@@ -137,7 +137,7 @@ unsigned int Shader::CreateProgram(std::string &vert, std::string &frag)
 	return programId;
 }
 
-Shader::Shader(std::string vertShaderPath, std::string fragShaderPath)
+void Shader::CreateShader(std::string vertShaderPath, std::string fragShaderPath)
 {
 	std::string vertSrc, fragSrc;
 	Shader::ReadFile(vertShaderPath, vertSrc);

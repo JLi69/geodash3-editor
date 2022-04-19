@@ -18,20 +18,27 @@ namespace Geodash3
 	class Engine
 	{
 		//Use this matrix to convert 3D coordinates into 2D
-		glm::mat4 perspectiveMat = glm::perspective(FOV * 3.14159f / 180.0f, 1920.0f / 1080.0f, 0.1f, 1000.0f);
-
+		glm::mat4 m_perspectiveMat = glm::perspective(FOV * 3.14159f / 180.0f, 1920.0f / 1080.0f, 0.1f, 1000.0f);
 		//Use this matrix to translate the models
 		//to the camera position
-		glm::mat4 viewMatrix = glm::mat4(1.0f);
+		glm::mat4 m_viewMatrix = glm::mat4(1.0f);
 		//Use this matrix to rotate the models
 		//to the camera rotation
-		glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), 0.0f * 3.14159f / 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 m_rotationMatrix = glm::rotate(glm::mat4(1.0f), 0.0f * 3.14159f / 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		//Preallocated model view matrix
+		glm::mat4 m_modelViewMat;
 
 		//Game window
-		GLFWwindow *gameWindow;
+		GLFWwindow *m_gameWindow;
+
+		//Vertex buffers
+		VertexBufferObj m_cube = VertexBufferObj(); //Cube object
+
+		//Shaders
+		Shader m_basic3D;
 
 		//Render game objects onto the screen
-		void Display();
+		void m_Display();
 	public:
 		//Run the main game loop
 		void Run();

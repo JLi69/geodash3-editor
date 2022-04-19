@@ -18,14 +18,14 @@ namespace Geodash3
 	class Engine
 	{
 		//Use this matrix to convert 3D coordinates into 2D
-		glm::mat4 perspectiveMat = glm::perspective(FOV, 1920.0f / 1080.0f, 0.1f, 1000.0f);
+		glm::mat4 perspectiveMat = glm::perspective(FOV * 3.14159f / 180.0f, 1920.0f / 1080.0f, 0.1f, 1000.0f);
 
 		//Use this matrix to translate the models
 		//to the camera position
 		glm::mat4 viewMatrix = glm::mat4(1.0f);
 		//Use this matrix to rotate the models
 		//to the camera rotation
-		glm::mat4 rotationMatrix = glm::mat4(1.0f);
+		glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), 0.0f * 3.14159f / 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		//Game window
 		GLFWwindow *gameWindow;

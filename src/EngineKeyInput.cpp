@@ -2,20 +2,32 @@
 
 void Geodash3::Engine::m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods)
 {
-	if(key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+	if(action == GLFW_PRESS)
 	{
-		xSpeed = 0.03f;	
+		switch(key)
+		{
+		case GLFW_KEY_A:
+			this->m_playerCube.movement.x = -0.03f;
+			break;
+		case GLFW_KEY_D:
+			this->m_playerCube.movement.x = 0.03f;
+			break;
+		//JUMP
+		case GLFW_KEY_SPACE:
+			this->m_playerCube.movement.y = 0.2f;
+			break;
+		}
 	}
-	else if(key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+	else if(action == GLFW_RELEASE)
 	{
-		xSpeed = -0.03f;	
-	}
-	else if(key == GLFW_KEY_RIGHT && action == GLFW_RELEASE)
-	{
-		xSpeed = 0.0f;	
-	}
-	else if(key == GLFW_KEY_LEFT && action == GLFW_RELEASE)
-	{
-		xSpeed = 0.0f;	
+		switch(key)
+		{
+		case GLFW_KEY_A:
+			this->m_playerCube.movement.x = 0.0f;
+			break;
+		case GLFW_KEY_D:
+			this->m_playerCube.movement.x = 0.0f;
+			break;
+		}
 	}
 }

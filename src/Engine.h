@@ -10,6 +10,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "GameObject/Player.h"
+
+#include <chrono>
+
 //Field of vision of the camera = 60 degrees
 #define FOV 60.0f
 
@@ -36,8 +40,9 @@ namespace Geodash3
 		//Shaders
 		Shader m_basic3D;
 
-		//X coordinate of player, CHANGE LATER!
-		float x = 0.0f, xSpeed = 0.0f;
+		//Game objects
+		//Player object
+		Geodash3::Player m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.0f, -2.5f));
 
 		//Handle key input
 		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);

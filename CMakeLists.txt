@@ -25,6 +25,9 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/EngineDisplay.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineKeyInput.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineUpdate.cpp
+
+	#Gameobjects
+	${PROJECT_SOURCE_DIR}/src/GameObject/Player.cpp
 )
 
 #Libraries to link with the project

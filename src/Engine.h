@@ -33,12 +33,19 @@ namespace Geodash3
 
 		//Vertex buffers
 		VertexBufferObj m_cube = VertexBufferObj(); //Cube object
-
 		//Shaders
 		Shader m_basic3D;
 
+		//X coordinate of player, CHANGE LATER!
+		float x = 0.0f, xSpeed = 0.0f;
+
+		//Handle key input
+		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);
+
 		//Render game objects onto the screen
 		void m_Display();
+		//Update the game objects
+		void m_Update();
 	public:
 		//Run the main game loop
 		void Run();

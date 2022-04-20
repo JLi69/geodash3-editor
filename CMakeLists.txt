@@ -23,6 +23,8 @@ add_executable(
 	#Engine
 	${PROJECT_SOURCE_DIR}/src/Engine.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineDisplay.cpp
+	${PROJECT_SOURCE_DIR}/src/EngineKeyInput.cpp
+	${PROJECT_SOURCE_DIR}/src/EngineUpdate.cpp
 )
 
 #Libraries to link with the project

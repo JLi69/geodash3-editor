@@ -1,14 +1,18 @@
 #include <string>
+#include <map>
 
 class Shader
 {
 	//Id of the shader program
-	unsigned int id;
+	unsigned int m_id;
+
+	//Store the uniforms of the shader in a map
+	std::map<std::string, int> m_uniforms;
 
 	//Print any errors for a shader
-	static void PrintShaderLog(unsigned int shader);
+	static void m_PrintShaderLog(unsigned int shader);
 	//Print any errors for a program
-	static void PrintProgramLog(unsigned int program);
+	static void m_PrintProgramLog(unsigned int program);
 	
 	//Read a shader src file
 	//path = location of the shader source file
@@ -16,12 +20,12 @@ class Shader
 	//function has one return value: 
 	// - true = sucessfully opened file
 	// - false = failed to open file
-	static bool ReadFile(std::string path, std::string &src);
+	static bool m_ReadFile(std::string path, std::string &src);
 
 	//Create a basic shader program
 	//vert = vertex shader source code
 	//frag = fragment shader source code
-	static unsigned int CreateProgram(std::string &vert, std::string &frag);
+	static unsigned int m_CreateProgram(std::string &vert, std::string &frag);
 public:
 	//Get the id of the program
 	unsigned int GetId();

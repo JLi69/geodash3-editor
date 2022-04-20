@@ -8,15 +8,10 @@
 
 unsigned int Shader::GetId()
 {
-	return this->id;
+	return this->m_id;
 }
 
-int Shader::GetUniformLocation(std::string uniformName)
-{
-	return glGetUniformLocation(this->id, uniformName.c_str());	
-}
-
-void Shader::PrintShaderLog(unsigned int shader)
+void Shader::m_PrintShaderLog(unsigned int shader)
 {
 	int len, chWritten;
 	char* msg;
@@ -34,7 +29,7 @@ void Shader::PrintShaderLog(unsigned int shader)
 	}
 }
 
-void Shader::PrintProgramLog(unsigned int program)
+void Shader::m_PrintProgramLog(unsigned int program)
 {
 	int len, chWritten;
 	char* msg;
@@ -52,7 +47,7 @@ void Shader::PrintProgramLog(unsigned int program)
 	}
 }
 
-bool Shader::ReadFile(std::string path, std::string &src)
+bool Shader::m_ReadFile(std::string path, std::string &src)
 {
 	std::ifstream file(path);
 
@@ -74,7 +69,7 @@ bool Shader::ReadFile(std::string path, std::string &src)
 	return true; //Succeeded in opening the file
 }
 
-unsigned int Shader::CreateProgram(std::string &vert, std::string &frag)
+unsigned int Shader::m_CreateProgram(std::string &vert, std::string &frag)
 {
 	unsigned int programId;
 
@@ -101,7 +96,7 @@ unsigned int Shader::CreateProgram(std::string &vert, std::string &frag)
 	if(vertCompileStatus != 1)
 	{
 		std::cout << "Vertex shader failed to compile!\n";
-		Shader::PrintShaderLog(vertShader);
+		Shader::m_PrintShaderLog(vertShader);
 	}
 	//Compile the fragment shader 
 	glCompileShader(fragShader);
@@ -111,7 +106,7 @@ unsigned int Shader::CreateProgram(std::string &vert, std::string &frag)
 	if(fragCompileStatus != 1)
 	{
 		std::cout << "Fragment shader failed to compile!\n";
-		Shader::PrintShaderLog(fragShader);
+		Shader::m_PrintShaderLog(fragShader);
 	}
 
 	//Attach the shaders to the program
@@ -128,7 +123,7 @@ unsigned int Shader::CreateProgram(std::string &vert, std::string &frag)
 	if(linkStatus != 1)
 	{
 		std::cout << "Program failed to link!\n";
-		Shader::PrintProgramLog(programId);
+		Shader::m_PrintProgramLog(programId);
 	}
 
 	glDetachShader(programId, vertShader);
@@ -137,11 +132,24 @@ unsigned int Shader::CreateProgram(std::string &vert, std::string &frag)
 	return programId;
 }
 
+//Uniforms
+int Shader::GetUniformLocation(std::string uniformName)
+{
+	//if uniform isn't found in the map, add it to the map
+	if(m_uniforms.count(uniformName) == 0)
+	{
+		m_uniforms[uniformName] = glGetUniformLocation(this->m_id, uniformName.c_str());
+		return m_uniforms[uniformName];
+	}
+	//Otherwise, just get it from the map
+	return m_uniforms[uniformName];
+}
+
 void Shader::CreateShader(std::string vertShaderPath, std::string fragShaderPath)
 {
 	std::string vertSrc, fragSrc;
-	Shader::ReadFile(vertShaderPath, vertSrc);
-	Shader::ReadFile(fragShaderPath, fragSrc);
+	Shader::m_ReadFile(vertShaderPath, vertSrc);
+	Shader::m_ReadFile(fragShaderPath, fragSrc);
 
-	this->id = Shader::CreateProgram(vertSrc, fragSrc);
+	this->m_id = Shader::m_CreateProgram(vertSrc, fragSrc);
 }

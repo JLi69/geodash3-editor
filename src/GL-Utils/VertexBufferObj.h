@@ -1,7 +1,7 @@
 class VertexBufferObj
 {
-	unsigned int id;
-	int vertSize; //How many floats are in a single vertex
+	unsigned int m_id;
+	int m_vertSize; //How many floats are in a single vertex
 public:
 	//Binds the vertex buffer
 	void Bind();

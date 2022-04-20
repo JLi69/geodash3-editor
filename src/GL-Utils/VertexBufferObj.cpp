@@ -5,12 +5,12 @@
 
 void VertexBufferObj::Bind()
 {
-	glBindBuffer(GL_ARRAY_BUFFER, this->id);	
+	glBindBuffer(GL_ARRAY_BUFFER, this->m_id);	
 }
 
 void VertexBufferObj::Enable()
 {
-	glVertexAttribPointer(0, vertSize, GL_FLOAT, false, sizeof(float) * vertSize, (void*)0);
+	glVertexAttribPointer(0, m_vertSize, GL_FLOAT, false, sizeof(float) * m_vertSize, (void*)0);
 	glEnableVertexAttribArray(0);
 }
 
@@ -18,15 +18,15 @@ void VertexBufferObj::Data(const float *dat, int size, int vSize)
 {
 	this->Bind();
 	glBufferData(GL_ARRAY_BUFFER, size, dat, GL_STATIC_DRAW);
-	this->vertSize = vSize;
+	this->m_vertSize = vSize;
 }
 
 unsigned int VertexBufferObj::GetId()
 {
-	return this->id;
+	return this->m_id;
 }
 
 void VertexBufferObj::GenBuffer()
 {
-	glGenBuffers(1, &this->id);
+	glGenBuffers(1, &this->m_id);
 }

@@ -1,4 +1,6 @@
+#ifndef INCLUDE_GAMEOBJECT
 #include "GameObject.h"
+#endif
 
 namespace Geodash3
 {

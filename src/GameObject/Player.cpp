@@ -23,6 +23,13 @@ void Geodash3::Player::Update()
 
 		this->rotation.x = 0.0f;
 	}
+
+	//Invisible borders for the player
+	if(this->position.x < -2.1f || this->position.x > 2.1f)
+	{
+		this->position.x = (this->position.x < -2.1f) ? -2.1f : 2.1f;
+		this->movement.x = 0.0f;
+	}
 }
 
 Geodash3::Player::Player(glm::vec3 pos)

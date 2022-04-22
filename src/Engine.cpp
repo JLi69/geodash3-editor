@@ -2,7 +2,10 @@
 
 //Main loop
 void Geodash3::Engine::Run()
-{		
+{
+	//Set seed for random number generator
+	srand(time(NULL));
+
 	//Set the background color of the window
 	GL_CALL(glClearColor(0.0f, 0.8f, 1.0f, 1.0f));
 	//Enable the depth test

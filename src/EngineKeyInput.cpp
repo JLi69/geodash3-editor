@@ -7,10 +7,10 @@ void Geodash3::Engine::m_HandleKeyInput(GLFWwindow* win, int key, int scancode, 
 		switch(key)
 		{
 		case GLFW_KEY_A:
-			this->m_playerCube.movement.x = -0.03f;
+			this->m_playerCube.movement.x = -0.05f;
 			break;
 		case GLFW_KEY_D:
-			this->m_playerCube.movement.x = 0.03f;
+			this->m_playerCube.movement.x = 0.05f;
 			break;
 		//JUMP
 		case GLFW_KEY_SPACE:

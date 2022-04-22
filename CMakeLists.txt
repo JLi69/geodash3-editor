@@ -28,6 +28,7 @@ add_executable(
 
 	#Gameobjects
 	${PROJECT_SOURCE_DIR}/src/GameObject/Player.cpp
+	${PROJECT_SOURCE_DIR}/src/GameObject/Block.cpp
 )
 
 #Libraries to link with the project

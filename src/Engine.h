@@ -11,8 +11,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "GameObject/Player.h"
+#include "GameObject/Block.h"
 
 #include <chrono>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
 
 //Field of vision of the camera = 60 degrees
 #define FOV 60.0f
@@ -43,6 +47,9 @@ namespace Geodash3
 		//Game objects
 		//Player object
 		Geodash3::Player m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.0f, -2.5f));
+		//Blocks (Stuff the player can jump on)
+		//Geodash3::Block testblock = Geodash3::Block(glm::vec3(0.0f, -1.0f, -20.0f));
+		std::vector<Geodash3::Block> m_blocks;	
 
 		//Handle key input
 		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);

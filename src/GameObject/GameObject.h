@@ -11,7 +11,7 @@ namespace Geodash3
 				  dimensions; //How big the collider is
 
 		//Returns true if colliding with another object
-		//static bool Colliding(Collider c1, Collider c2);
+		static bool Colliding(Collider c1, Collider c2);
 	};
 
 	//Game Object

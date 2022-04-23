@@ -46,7 +46,7 @@ namespace Geodash3
 
 		//Game objects
 		//Player object
-		Geodash3::Player m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.0f, -2.5f));
+		Geodash3::Player m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.8f, -4.5f));
 		//Blocks (Stuff the player can jump on)
 		//Geodash3::Block testblock = Geodash3::Block(glm::vec3(0.0f, -1.0f, -20.0f));
 		std::vector<Geodash3::Block> m_blocks;	

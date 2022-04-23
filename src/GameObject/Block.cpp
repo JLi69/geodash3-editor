@@ -3,7 +3,15 @@
 //Update function
 void Geodash3::Block::Update()
 {
+	//Move the block
 	this->position += this->movement;
+	//Move the collider
+	this->m_collider.position = this->position;
+}
+
+Geodash3::Collider Geodash3::Block::getCollider()
+{
+	return this->m_collider;
 }
 
 //Constructor
@@ -13,5 +21,9 @@ Geodash3::Block::Block(glm::vec3 pos)
 	this->position = pos;
 	this->dimensions = glm::vec3(0.25f, 0.25f, 0.25f);
 	this->rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	this->movement = glm::vec3(0.0f, 0.0f, 0.07f);
+	this->movement = glm::vec3(0.0f, 0.0f, 0.1f);
+
+	//Set up the collider
+	this->m_collider.dimensions = this->dimensions;
+	this->m_collider.position = this->position;
 }

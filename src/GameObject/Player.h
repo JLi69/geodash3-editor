@@ -9,9 +9,14 @@ namespace Geodash3
 	{
 		float m_gravity; //Force of gravity on the player
 
-		Collider m_collider; //Box collider for the player
+		Geodash3::Collider m_collider; //Box collider for the player
 	public:
+		bool falling = false;
+
 		void Update(); //Update the player object
+
+		//Return the collider
+		Geodash3::Collider getCollider();
 
 		//Constructor
 		Player(glm::vec3 pos);

@@ -34,11 +34,16 @@ Geodash3::Engine::Engine()
 	Geodash3::init(this->m_gameWindow, "Geodash 3D", onWinResizeFunc);	
 
 	//Set up the vertex buffers
+	//Cube	
 	GL_CALL(m_cube.GenBuffer());
 	GL_CALL(m_cube.Data(&Geodash3::cubeVerts[0], sizeof(Geodash3::cubeVerts), 3));
+	//Pyramid
+	GL_CALL(m_pyramid.GenBuffer());
+	GL_CALL(m_pyramid.Data(&Geodash3::pyramidVerts[0], sizeof(Geodash3::pyramidVerts), 3));
 
 	//Set up the shaders
-	m_basic3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/basic-frag.glsl");
+	GL_CALL(m_basicPyramid3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/pyramid-frag.glsl"));
+	GL_CALL(m_basic3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/basic-frag.glsl"));	
 
 	//Set up key input
 	glfwSetWindowUserPointer(this->m_gameWindow, this);

@@ -126,8 +126,10 @@ unsigned int Shader::m_CreateProgram(std::string &vert, std::string &frag)
 		Shader::m_PrintProgramLog(programId);
 	}
 
-	glDetachShader(programId, vertShader);
-	glDetachShader(programId, fragShader);
+	//glDetachShader(programId, vertShader);
+	//glDetachShader(programId, fragShader);
+	glDeleteShader(vertShader);
+	glDeleteShader(fragShader);
 
 	return programId;
 }

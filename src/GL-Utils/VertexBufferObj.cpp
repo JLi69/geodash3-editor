@@ -10,6 +10,7 @@ void VertexBufferObj::Bind()
 
 void VertexBufferObj::Enable()
 {
+	this->Bind();
 	glVertexAttribPointer(0, m_vertSize, GL_FLOAT, false, sizeof(float) * m_vertSize, (void*)0);
 	glEnableVertexAttribArray(0);
 }

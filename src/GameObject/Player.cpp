@@ -23,13 +23,15 @@ void Geodash3::Player::Update()
 		this->rotation.x += 0.1f;
 	}
 	//Player is on ground, should not be affected by gravity
-	else if(this->position.y <= -0.8f)
+	else if(this->position.y <= -1.8f)
 	{
 		this->position.y = -1.8f;
 		this->m_gravity = 0.0f;
 		this->movement.y = 0.0f;
 
 		this->rotation.x = 0.0f;
+
+		this->canJump = true;
 	}
 
 	//Invisible borders for the player

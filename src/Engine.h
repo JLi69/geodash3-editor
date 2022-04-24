@@ -12,6 +12,7 @@
 
 #include "GameObject/Player.h"
 #include "GameObject/Block.h"
+#include "GameObject/Spike.h"
 
 #include <chrono>
 #include <vector>
@@ -40,16 +41,18 @@ namespace Geodash3
 		GLFWwindow *m_gameWindow;
 
 		//Vertex buffers
-		VertexBufferObj m_cube = VertexBufferObj(); //Cube object
+		VertexBufferObj m_cube = VertexBufferObj(), //Cube object
+						m_pyramid = VertexBufferObj(); //Pyramid Object
 		//Shaders
-		Shader m_basic3D;
+		Shader m_basic3D, //Basic cube shader
+			   m_basicPyramid3D; //Basic pyramid shader
 
 		//Game objects
 		//Player object
 		Geodash3::Player m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.8f, -4.5f));
-		//Blocks (Stuff the player can jump on)
-		//Geodash3::Block testblock = Geodash3::Block(glm::vec3(0.0f, -1.0f, -20.0f));
-		std::vector<Geodash3::Block> m_blocks;	
+		//Blocks (Stuff the player can jump on)	
+		std::vector<Geodash3::Block> m_blocks;
+		std::vector<Geodash3::Spike> m_spikes;
 
 		//Handle key input
 		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);

@@ -13,22 +13,16 @@ void main()
 {
 	o_Color = u_Color;
 
-	//Outline the pyramid
-	if(abs(fragPos.x) > 0.95 && abs(fragPos.y) > 0.9 ||
-		abs(fragPos.y) > 0.95 && abs(fragPos.z) > 0.9 ||
-		abs(fragPos.x) > 0.95 && abs(fragPos.z) > 0.9)
-		o_Color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	if(fragPos.x + 0.5 + fragPos.z + 0.5 <= fragPos.y + 0.5 &&
+		fragPos.x + 0.5 + fragPos.z + 0.5 >= fragPos.y - 0.5 ||
 
-	if(fragPos.x + 0.5 + fragPos.z + 0.5 <= fragPos.y + 0.1 &&
-		fragPos.x + 0.5 + fragPos.z + 0.5 >= fragPos.y - 0.1 ||
-
-		-fragPos.x + 0.5 + fragPos.z + 0.5 <= fragPos.y + 0.1 &&
-		-fragPos.x + 0.5 + fragPos.z + 0.5 >= fragPos.y - 0.1 ||
+		-fragPos.x + 0.5 + fragPos.z + 0.5 <= fragPos.y + 0.5 &&
+		-fragPos.x + 0.5 + fragPos.z + 0.5 >= fragPos.y - 0.5 ||
 		
-		fragPos.x + 0.5 - fragPos.z + 0.5 <= fragPos.y + 0.1 &&
-		fragPos.x + 0.5 - fragPos.z + 0.5 >= fragPos.y - 0.1 ||
+		fragPos.x + 0.5 - fragPos.z + 0.5 <= fragPos.y + 0.5 &&
+		fragPos.x + 0.5 - fragPos.z + 0.5 >= fragPos.y - 0.5 ||
 
-		-fragPos.x + 0.5 - fragPos.z + 0.5 <= fragPos.y + 0.1 &&
-		-fragPos.x + 0.5 - fragPos.z + 0.5 >= fragPos.y - 0.1) 
-		o_Color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		-fragPos.x + 0.5 - fragPos.z + 0.5 <= fragPos.y + 0.5 &&
+		-fragPos.x + 0.5 - fragPos.z + 0.5 >= fragPos.y - 0.5) 
+		o_Color *= 0.5;
 }

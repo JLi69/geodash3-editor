@@ -11,8 +11,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "GameObject/Player.h"
-#include "GameObject/Block.h"
-#include "GameObject/Spike.h"
+#include "Level/level.h"
 
 #include <chrono>
 #include <vector>
@@ -50,9 +49,8 @@ namespace Geodash3
 		//Game objects
 		//Player object
 		Geodash3::Player m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.8f, -4.5f));
-		//Blocks (Stuff the player can jump on)	
-		std::vector<Geodash3::Block> m_blocks;
-		std::vector<Geodash3::Spike> m_spikes;
+		//Level
+		Geodash3::Level m_currentLevel;
 
 		//Handle key input
 		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);

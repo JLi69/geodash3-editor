@@ -33,7 +33,7 @@ void Geodash3::Engine::m_Display()
 	GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));
 
 	//Display the block	
-	for(auto block : this->m_blocks)
+	for(auto block : this->m_currentLevel.blocks)
 	{
 		m_modelViewMat = m_rotationMatrix * 
 					 m_viewMatrix * 
@@ -45,8 +45,7 @@ void Geodash3::Engine::m_Display()
 		GL_CALL(glUniformMatrix4fv(m_basic3D.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));	
 		
 		GL_CALL(glUniform4f(m_basic3D.GetUniformLocation("u_Color"), 0.6f, 0.6f, 0.6f, 1.0f));
-		if(block.position.z < -0.5f)
-			GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));
+		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));
 	}
 
 	//Display the spikes	
@@ -54,7 +53,7 @@ void Geodash3::Engine::m_Display()
 	GL_CALL(glUseProgram(m_basicPyramid3D.GetId()));
 	GL_CALL(glUniformMatrix4fv(m_basicPyramid3D.GetUniformLocation("u_PerspectiveMat"), 1, false, glm::value_ptr(this->m_perspectiveMat)));
 
-	for(auto spike : this->m_spikes)
+	for(auto spike : this->m_currentLevel.spikes)
 	{
 		m_modelViewMat = m_rotationMatrix *
 						 m_viewMatrix *

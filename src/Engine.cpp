@@ -52,4 +52,7 @@ Geodash3::Engine::Engine()
 		static_cast<Engine*>(glfwGetWindowUserPointer(win))->m_HandleKeyInput(win, key, scancode, action, mods);
 	};
 	glfwSetKeyCallback(m_gameWindow, keyInputFunc);
+
+	//Test level file
+	this->m_currentLevel = Geodash3::LoadLevel("res/levels/level0.lvl");
 }

@@ -9,7 +9,7 @@ namespace Geodash3
 		Geodash3::Collider m_collider;
 	public:
 		//Update the block object
-		void Update();
+		void Update(float secToDrawFrame);
 
 		//Return the collider
 		Geodash3::Collider getCollider();

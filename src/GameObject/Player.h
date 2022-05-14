@@ -14,7 +14,7 @@ namespace Geodash3
 		bool falling = false,
 			 canJump = true; //Stores if the player can jump
 
-		void Update(); //Update the player object
+		void Update(float secToDrawFrame); //Update the player object
 
 		//Return the collider
 		Geodash3::Collider getCollider();

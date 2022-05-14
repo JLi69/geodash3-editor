@@ -13,10 +13,7 @@
 #include "GameObject/Player.h"
 #include "Level/level.h"
 
-#include <chrono>
 #include <vector>
-#include <ctime>
-#include <cstdlib>
 
 //Field of vision of the camera = 60 degrees
 #define FOV 60.0f
@@ -51,6 +48,9 @@ namespace Geodash3
 		Geodash3::Player m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.8f, -4.5f));
 		//Level
 		Geodash3::Level m_currentLevel;
+
+		//Number of seconds to draw the frame
+		float m_secondsToDrawFrame = 1.0f;
 
 		//Handle key input
 		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);

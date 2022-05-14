@@ -1,11 +1,10 @@
 #include "Engine.h"
+#include <chrono>
+#include <iostream>
 
 //Main loop
 void Geodash3::Engine::Run()
 {
-	//Set seed for random number generator
-	srand(time(NULL));
-
 	//Set the background color of the window
 	GL_CALL(glClearColor(0.0f, 0.8f, 1.0f, 1.0f));
 	//Enable the depth test
@@ -14,8 +13,17 @@ void Geodash3::Engine::Run()
 
 	while(!glfwWindowShouldClose(m_gameWindow))
 	{
+		//Begin of frame
+		std::chrono::time_point<std::chrono::system_clock> begin = std::chrono::system_clock::now();
 		this->m_Display();
 		this->m_Update();
+		//Output frames per second
+		std::cout << "Frames Per Second: " << 1.0f / this->m_secondsToDrawFrame << '\n';
+		//End of frame
+		std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+		//Calculate number of seconds to draw the frame
+		std::chrono::duration<float> timePassed = end - begin;
+		this->m_secondsToDrawFrame = timePassed.count();
 	}
 
 	glfwTerminate();

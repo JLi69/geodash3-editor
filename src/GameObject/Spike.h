@@ -10,7 +10,7 @@ namespace Geodash3
 		Geodash3::Collider colliders[4];
 
 		//Update the spike
-		void Update();
+		void Update(float secToDrawFrame);
 
 		//Constructor
 		Spike(glm::vec3 pos);

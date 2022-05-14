@@ -7,7 +7,7 @@ void Geodash3::Engine::m_Update()
 	//static int timePassed = 0;
 
 	//Update the player
-	this->m_playerCube.Update();
+	this->m_playerCube.Update(this->m_secondsToDrawFrame);
 
 	//Update the blocks
 	bool hit = false; //Store if the player collided with a block
@@ -17,22 +17,7 @@ void Geodash3::Engine::m_Update()
 		if(Geodash3::Collider::Colliding(this->m_playerCube.getCollider(), block.getCollider()))
 		{
 			hit = true;
-			this->m_playerCube.canJump = true;
-			//Player is moving left and right and hits the cube
-			if(this->m_playerCube.position.x >= block.position.x + block.dimensions.x && 
-				this->m_playerCube.position.y > block.position.y - block.dimensions.y &&
-				this->m_playerCube.position.y < block.position.y + block.dimensions.y ||
-
-				this->m_playerCube.position.x <= block.position.x - block.dimensions.x &&
-				this->m_playerCube.position.y > block.position.y - block.dimensions.y &&
-				this->m_playerCube.position.y < block.position.y + block.dimensions.y)
-			{
-				this->m_playerCube.movement.x *= -1;
-				this->m_playerCube.Update();
-				this->m_playerCube.movement.x *= -1;
-				block.Update();
-				continue;
-			}	
+			this->m_playerCube.canJump = true;	
 			//Player hits the cube head on
 			if(this->m_playerCube.position.z <= block.position.z - block.dimensions.z - this->m_playerCube.position.z &&
 				this->m_playerCube.position.y > block.position.y - block.dimensions.y &&
@@ -43,6 +28,21 @@ void Geodash3::Engine::m_Update()
 				this->m_currentLevel = Geodash3::LoadLevel("res/levels/level0.lvl");	
 				return;
 			}
+			//Player is moving left and right and hits the cube
+			/*if(this->m_playerCube.position.x >= block.position.x + block.dimensions.x + this->m_playerCube.dimensions.x && 
+				this->m_playerCube.position.y > block.position.y - block.dimensions.y &&
+				this->m_playerCube.position.y < block.position.y + block.dimensions.y ||
+
+				this->m_playerCube.position.x <= block.position.x - block.dimensions.x - this->m_playerCube.dimensions.x &&
+				this->m_playerCube.position.y > block.position.y - block.dimensions.y &&
+				this->m_playerCube.position.y < block.position.y + block.dimensions.y)
+			{
+				this->m_playerCube.movement.x *= -1;
+				this->m_playerCube.Update();
+				this->m_playerCube.movement.x *= -1;
+				block.Update();
+				continue;
+			}*/
 			//Player fell on top of the cube
 			if(this->m_playerCube.falling)
 				this->m_playerCube.position.y = block.position.y + this->m_playerCube.dimensions.y + block.dimensions.y;	
@@ -52,7 +52,7 @@ void Geodash3::Engine::m_Update()
 			this->m_playerCube.rotation.x = 0.0f;
 		}
 
-		block.Update();
+		block.Update(this->m_secondsToDrawFrame);
 	}
 
 	//Update the spikes
@@ -71,7 +71,7 @@ void Geodash3::Engine::m_Update()
 			}
 		}
 
-		spike.Update();	
+		spike.Update(this->m_secondsToDrawFrame);	
 	}
 
 	//Check if the player collided with a block

@@ -1,9 +1,9 @@
 #include "Player.h"
 
-void Geodash3::Player::Update()
+void Geodash3::Player::Update(float secToDrawFrame)
 {
 	//Move the player
-	this->position += this->movement;
+	this->position += this->movement * 1.0f / secToDrawFrame;
 	//Move the collider
 	this->m_collider.position = this->position;
 	this->m_collider.position.y -= 0.05f;
@@ -16,7 +16,7 @@ void Geodash3::Player::Update()
 
 	if(this->falling)
 	{
-		this->m_gravity = 0.01f;
+		this->m_gravity = 0.0002f;
 		this->movement.y -= this->m_gravity;
 		
 		//Have the player spin

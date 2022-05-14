@@ -18,8 +18,35 @@ void Geodash3::Engine::m_Update()
 		{
 			hit = true;
 			this->m_playerCube.canJump = true;
+			//Player is moving left and right and hits the cube
+			if(this->m_playerCube.position.x >= block.position.x + block.dimensions.x && 
+				this->m_playerCube.position.y > block.position.y - block.dimensions.y &&
+				this->m_playerCube.position.y < block.position.y + block.dimensions.y ||
+
+				this->m_playerCube.position.x <= block.position.x - block.dimensions.x &&
+				this->m_playerCube.position.y > block.position.y - block.dimensions.y &&
+				this->m_playerCube.position.y < block.position.y + block.dimensions.y)
+			{
+				this->m_playerCube.movement.x *= -1;
+				this->m_playerCube.Update();
+				this->m_playerCube.movement.x *= -1;
+				block.Update();
+				continue;
+			}	
+			//Player hits the cube head on
+			if(this->m_playerCube.position.z <= block.position.z - block.dimensions.z - this->m_playerCube.position.z &&
+				this->m_playerCube.position.y > block.position.y - block.dimensions.y &&
+				this->m_playerCube.position.y < block.position.y + block.dimensions.y)
+			{
+				//Reset the player and level
+				this->m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.8f, -4.5f));
+				this->m_currentLevel = Geodash3::LoadLevel("res/levels/level0.lvl");	
+				return;
+			}
+			//Player fell on top of the cube
 			if(this->m_playerCube.falling)
-				this->m_playerCube.position.y = block.position.y + this->m_playerCube.dimensions.y + block.dimensions.y;
+				this->m_playerCube.position.y = block.position.y + this->m_playerCube.dimensions.y + block.dimensions.y;	
+
 			this->m_playerCube.falling = false;
 			this->m_playerCube.movement.y = 0.0f;
 			this->m_playerCube.rotation.x = 0.0f;

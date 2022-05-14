@@ -31,6 +31,19 @@ void Geodash3::Engine::m_Update()
 	//Update the spikes
 	for(auto &spike : this->m_currentLevel.spikes)
 	{
+		//Check for collisions
+		for(int i = 0; i < 4; i++)
+		{
+			//Check for collision
+			if(Geodash3::Collider::Colliding(this->m_playerCube.getCollider(), spike.colliders[i]))
+			{
+				//Reset the player and level
+				this->m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.8f, -4.5f));
+				this->m_currentLevel = Geodash3::LoadLevel("res/levels/level0.lvl");	
+				return;
+			}
+		}
+
 		spike.Update();	
 	}
 

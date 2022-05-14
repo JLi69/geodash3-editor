@@ -7,6 +7,8 @@ namespace Geodash3
 	class Spike : public GameObject
 	{
 	public:
+		Geodash3::Collider colliders[4];
+
 		//Update the spike
 		void Update();
 

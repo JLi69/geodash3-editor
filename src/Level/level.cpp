@@ -7,6 +7,7 @@ Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath)
 	std::ifstream levelFile(levelFilePath); //Open the file that contains the level data
 
 	Geodash3::Level loaded; //Level to be loaded
+	loaded.levelEnd = -32.0f;
 
 	//File failed to open
 	if(!levelFile.is_open())
@@ -18,13 +19,16 @@ Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath)
 	//Read the level file
 	//levels are 4 wide, 80 long, and 12 high
 	std::string line;
-	int currentLine = 0;
+	int currentLine = 0,
+		end = 0;
 	//Read the file
 	while(std::getline(levelFile, line))
 	{
 		//Ignore empty lines
 		if(line.size() == 0)
 			continue;
+
+		end = line.size() > end ? line.size() : end;
 
 		//Read the line
 		for(int i = 0; i < line.size(); i++)
@@ -51,6 +55,8 @@ Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath)
 
 		currentLine++;
 	}
+
+	loaded.levelEnd -= (float)end * 0.5f;
 	
 	//Close the file
 	levelFile.close();

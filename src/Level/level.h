@@ -8,6 +8,7 @@ namespace Geodash3
 {
 	struct Level
 	{
+		float levelEnd;
 		std::vector<Geodash3::Block> blocks;
 		std::vector<Geodash3::Spike> spikes;
 	};

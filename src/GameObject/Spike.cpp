@@ -17,14 +17,14 @@ Geodash3::Spike::Spike(glm::vec3 pos)
 	//Set up the dimensions, rotation, and movement of the spike
 	this->dimensions = glm::vec3(0.25f, 0.25f, 0.25f);
 	this->rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	this->movement = glm::vec3(0.0f, 0.0f, 0.002f);
+	this->movement = glm::vec3(0.0f, 0.0f, 0.0015f);
 
 	//Set up the colliders
 	for(int i = 0; i < 4; i++)
 	{
-		this->colliders[i].dimensions.x = 0.25f - 0.05f * (float)i;
+		this->colliders[i].dimensions.x = 0.2f - 0.05f * (float)i;
 		this->colliders[i].dimensions.y = 0.25f / 4.0f;
-		this->colliders[i].dimensions.z = 0.25f - 0.05f * (float)i;
+		this->colliders[i].dimensions.z = 0.2f - 0.05f * (float)i;
 
 		this->colliders[i].position.x = this->position.x;
 		this->colliders[i].position.y = this->position.y + 0.25f / 4.0f * (float)i;

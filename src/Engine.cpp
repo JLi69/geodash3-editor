@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <chrono>
 #include <iostream>
+#include <fstream>
 
 //Main loop
 void Geodash3::Engine::Run()
@@ -75,6 +76,19 @@ Geodash3::Engine::Engine()
 	};
 	glfwSetKeyCallback(m_gameWindow, keyInputFunc);
 
-	//Test level file
-	this->m_currentLevel = Geodash3::LoadLevel("res/levels/level0.lvl");
+	//Load the level files into memory
+	std::ifstream levelListFile("res/levels/level-list.txt");
+	//Failed to open level file list
+	if(!levelListFile.is_open())
+	{
+		std::cout << "Fatal: failed to open res/levels/level-list.txt!\n";
+		exit(-1);
+	}
+	//read the level list file
+	std::string line;
+	while(std::getline(levelListFile, line))
+	{
+		this->m_levels.push_back(Geodash3::LoadLevel(line)); //Load the level into memory
+		this->m_resetLevels.push_back(Geodash3::LoadLevel(line));
+	}
 }

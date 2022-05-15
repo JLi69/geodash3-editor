@@ -6,5 +6,7 @@ geodash3
 *.txt
 #except for CMakeLists.txt
 !CMakeLists.txt
+#and level-list.txt
+!level-list.txt
 
 CMakeFiles

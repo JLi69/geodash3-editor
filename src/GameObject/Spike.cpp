@@ -22,12 +22,12 @@ Geodash3::Spike::Spike(glm::vec3 pos)
 	//Set up the colliders
 	for(int i = 0; i < 4; i++)
 	{
-		this->colliders[i].dimensions.x = 0.2f - 0.05f * (float)i;
-		this->colliders[i].dimensions.y = 0.25f / 4.0f;
-		this->colliders[i].dimensions.z = 0.2f - 0.05f * (float)i;
+		this->colliders[i].dimensions.x = 0.15f - 0.03f * (float)i;
+		this->colliders[i].dimensions.y = 0.25f / 6.0f;
+		this->colliders[i].dimensions.z = 0.15f - 0.03f * (float)i;
 
 		this->colliders[i].position.x = this->position.x;
-		this->colliders[i].position.y = this->position.y + 0.25f / 4.0f * (float)i;
+		this->colliders[i].position.y = this->position.y + 0.25f / 6.0f * (float)i;
 		this->colliders[i].position.z = this->position.z;
 	}
 }

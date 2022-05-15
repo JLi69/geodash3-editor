@@ -16,7 +16,7 @@
 #include <vector>
 
 //Field of vision of the camera = 60 degrees
-#define FOV 60.0f
+#define FOV 55.0f
 
 namespace Geodash3
 {
@@ -47,7 +47,11 @@ namespace Geodash3
 		//Player object
 		Geodash3::Player m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.8f, -4.5f));
 		//Level
-		Geodash3::Level m_currentLevel;
+		int m_currentLevel = 0;
+		std::vector<Geodash3::Level> m_levels; //All the levels
+		std::vector<Geodash3::Level> m_resetLevels; //When you want to reset a level,
+													//set it equal to the corresponding level
+													//in this vector
 
 		//Number of seconds to draw the frame
 		float m_secondsToDrawFrame = 1.0f;

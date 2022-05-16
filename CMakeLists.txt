@@ -27,7 +27,6 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/EngineUpdate.cpp
 
 	#Gameobjects
-	${PROJECT_SOURCE_DIR}/src/GameObject/Player.cpp
 	${PROJECT_SOURCE_DIR}/src/GameObject/Block.cpp
 	${PROJECT_SOURCE_DIR}/src/GameObject/Spike.cpp
 	${PROJECT_SOURCE_DIR}/src/GameObject/Collider.cpp

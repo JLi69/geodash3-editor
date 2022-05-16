@@ -10,7 +10,6 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "GameObject/Player.h"
 #include "Level/level.h"
 
 #include <vector>
@@ -44,8 +43,6 @@ namespace Geodash3
 			   m_basicPyramid3D; //Basic pyramid shader
 
 		//Game objects
-		//Player object
-		Geodash3::Player m_playerCube = Geodash3::Player(glm::vec3(0.0f, -1.8f, -4.5f));
 		//Level
 		int m_currentLevel = 0;
 		std::vector<Geodash3::Level> m_levels; //All the levels

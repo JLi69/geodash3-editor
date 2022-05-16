@@ -1,5 +1,6 @@
 Makefile
 geodash3
+gdash3-editor
 *.cmake
 
 #ignore all txt files

@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 #Name of project
-project(geodash3)
+project(gdash3-editor)
 
 #Create the executable
 add_executable(

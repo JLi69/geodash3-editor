@@ -1,7 +1,25 @@
 #include "src/Engine.h"
+#include <iostream>
+#include <cstdlib>
 
-int main()
-{	
+int main(int argc, char *argv[])
+{
 	Geodash3::Engine gameEngine = Geodash3::Engine();
-	gameEngine.Run();
+
+	switch(argc)
+	{
+	//No arguments
+	case 1:
+		gameEngine.Run();
+		break;
+	//One argument: the name of the file that the program will
+	//output the level contents into
+	case 2:
+		break;
+	//Invalid argument count
+	default:
+		std::cout << "Invalid argument count!\n";
+		exit(-1);
+		break;
+	}
 }

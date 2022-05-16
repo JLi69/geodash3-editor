@@ -45,10 +45,7 @@ namespace Geodash3
 		//Game objects
 		//Level
 		int m_currentLevel = 0;
-		std::vector<Geodash3::Level> m_levels; //All the levels
-		std::vector<Geodash3::Level> m_resetLevels; //When you want to reset a level,
-													//set it equal to the corresponding level
-													//in this vector
+		Geodash3::Level m_level; //Level being edited
 
 		//Number of seconds to draw the frame
 		float m_secondsToDrawFrame = 1.0f;

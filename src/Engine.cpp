@@ -74,21 +74,5 @@ Geodash3::Engine::Engine()
 	{
 		static_cast<Engine*>(glfwGetWindowUserPointer(win))->m_HandleKeyInput(win, key, scancode, action, mods);
 	};
-	glfwSetKeyCallback(m_gameWindow, keyInputFunc);
-
-	//Load the level files into memory
-	std::ifstream levelListFile("res/levels/level-list.txt");
-	//Failed to open level file list
-	if(!levelListFile.is_open())
-	{
-		std::cout << "Fatal: failed to open res/levels/level-list.txt!\n";
-		exit(-1);
-	}
-	//read the level list file
-	std::string line;
-	while(std::getline(levelListFile, line))
-	{
-		this->m_levels.push_back(Geodash3::LoadLevel(line)); //Load the level into memory
-		this->m_resetLevels.push_back(Geodash3::LoadLevel(line));
-	}
+	glfwSetKeyCallback(m_gameWindow, keyInputFunc);	
 }

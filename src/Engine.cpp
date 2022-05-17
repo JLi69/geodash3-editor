@@ -54,7 +54,7 @@ Geodash3::Engine::Engine()
 	};
 
 	//Initialize everything
-	Geodash3::init(this->m_gameWindow, "Geodash 3D", onWinResizeFunc);	
+	Geodash3::init(this->m_gameWindow, "Geodash 3D Level Editor", onWinResizeFunc);	
 
 	//Set up the vertex buffers
 	//Cube	
@@ -74,5 +74,16 @@ Geodash3::Engine::Engine()
 	{
 		static_cast<Engine*>(glfwGetWindowUserPointer(win))->m_HandleKeyInput(win, key, scancode, action, mods);
 	};
-	glfwSetKeyCallback(m_gameWindow, keyInputFunc);	
+	glfwSetKeyCallback(m_gameWindow, keyInputFunc);
+
+	//Set up the camera
+	this->m_camera.position = glm::vec3(0.0f, 0.0f, 0.0f);
+	this->m_camera.movement = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	glfwGetCursorPos(this->m_gameWindow, &this->m_mouseX, &this->m_mouseY);
+	//Hide cursor
+	glfwSetInputMode(this->m_gameWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	//TEST - DELETE LATER
+	this->m_level.blocks.push_back(Geodash3::Block(glm::vec3(-0.75f, -1.75f, -4.0f)));
 }

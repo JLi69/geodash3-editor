@@ -32,6 +32,12 @@ namespace Geodash3
 		//Preallocated model view matrix
 		glm::mat4 m_modelViewMat;
 
+		//Camera
+		Geodash3::GameObject m_camera;
+		float m_cameraRotationSpeed = 0.0f;	
+		//Mouse position
+		double m_mouseX, m_mouseY;
+
 		//Game window
 		GLFWwindow *m_gameWindow;
 

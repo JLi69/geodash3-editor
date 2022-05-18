@@ -66,7 +66,8 @@ Geodash3::Engine::Engine()
 
 	//Set up the shaders
 	GL_CALL(m_basicPyramid3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/pyramid-frag.glsl"));
-	GL_CALL(m_basic3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/basic-frag.glsl"));	
+	GL_CALL(m_basic3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/basic-frag.glsl"));
+	GL_CALL(m_white.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/white.glsl"));
 
 	//Set up key input
 	glfwSetWindowUserPointer(this->m_gameWindow, this);
@@ -80,9 +81,9 @@ Geodash3::Engine::Engine()
 	this->m_camera.position = glm::vec3(0.0f, 0.0f, 0.0f);
 	this->m_camera.movement = glm::vec3(0.0f, 0.0f, 0.0f);
 
-	glfwGetCursorPos(this->m_gameWindow, &this->m_mouseX, &this->m_mouseY);
 	//Hide cursor
 	glfwSetInputMode(this->m_gameWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwGetCursorPos(this->m_gameWindow, &this->m_mouseX, &this->m_mouseY);
 
 	//TEST - DELETE LATER
 	this->m_level.blocks.push_back(Geodash3::Block(glm::vec3(-0.75f, -1.75f, -4.0f)));

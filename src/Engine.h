@@ -34,9 +34,12 @@ namespace Geodash3
 
 		//Camera
 		Geodash3::GameObject m_camera;
-		float m_cameraRotationSpeed = 0.0f;	
+		float m_cameraRotationSpeed = 0.0f,
+			  m_cameraPitchSpeed = 0.0f;	
 		//Mouse position
 		double m_mouseX, m_mouseY;
+		//Highlighted cube
+		glm::vec3 highlighted;
 
 		//Game window
 		GLFWwindow *m_gameWindow;
@@ -46,7 +49,8 @@ namespace Geodash3
 						m_pyramid = VertexBufferObj(); //Pyramid Object
 		//Shaders
 		Shader m_basic3D, //Basic cube shader
-			   m_basicPyramid3D; //Basic pyramid shader
+			   m_basicPyramid3D, //Basic pyramid shader
+			   m_white; //Just color a model white
 
 		//Game objects
 		//Level

@@ -13,6 +13,9 @@ void Geodash3::Engine::Run()
 	GL_CALL(glDepthFunc(GL_LEQUAL));
 	GL_CALL(glEnable(GL_CULL_FACE));
 
+	GL_CALL(glEnable(GL_BLEND));
+	GL_CALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
 	float avgFPS = 0.0f, //Average frames per second 
 		  frameCount = 0.0f; //Number of frames passed
 

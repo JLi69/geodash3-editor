@@ -54,7 +54,7 @@ void Geodash3::Engine::m_Display()
 			   			 glm::rotate(glm::mat4(1.0f), -this->m_camera.rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)) * 
 			   			 glm::rotate(glm::mat4(1.0f), this->m_camera.rotation.y, glm::vec3(0.0f, 1.0f, 0.0f)) * 
 			   			 glm::translate(glm::mat4(1.0f), this->m_camera.position) *
-			   			 glm::translate(glm::mat4(1.0f), -highlighted) *
+			   			 glm::translate(glm::mat4(1.0f), -this->m_highlighted) *
 			   			 m_viewMatrix *  
 			   			 glm::scale(glm::mat4(1.0f), glm::vec3(0.25f, 0.25f, 0.25f));
 		GL_CALL(glUniformMatrix4fv(m_white.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));

@@ -14,7 +14,7 @@ void Geodash3::Engine::m_Update()
 	if(glfwGetInputMode(this->m_gameWindow, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
 	{
 		this->m_cameraRotationSpeed = 0.000015f * (float)(tempMouseX - this->m_mouseX);
-		this->m_cameraPitchSpeed = -0.000005f * (float)(tempMouseY - this->m_mouseY);
+		this->m_cameraPitchSpeed = -0.000015f * (float)(tempMouseY - this->m_mouseY);
 	
 
 		if(this->m_camera.rotation.x < -3.14159f / 2.0f)
@@ -27,11 +27,33 @@ void Geodash3::Engine::m_Update()
 		this->m_cameraRotationSpeed = 0.0f;
 		this->m_cameraPitchSpeed = 0.0f;
 	}
+	//Set the mouse position
 	this->m_mouseX = tempMouseX;
 	this->m_mouseY = tempMouseY;
 
+	//Camera boundaries
+	if(this->m_camera.position.x < -1.0f)
+		this->m_camera.position.x = -1.0f;
+	else if(this->m_camera.position.x > 1.0f)
+		this->m_camera.position.x = 1.0f;
+
+	if(this->m_camera.position.y > 1.5f)
+		this->m_camera.position.y = 1.5f;
+	else if(this->m_camera.position.y < -2.5f)
+		this->m_camera.position.y = -2.5f;
+
 	//Current highlighted block	
-	highlighted.x = glm::floor((this->m_camera.position.x + 2.0f * cosf(-this->m_camera.rotation.x) * sinf(-this->m_camera.rotation.y)) / 0.5f) * 0.5f + 0.25f;
-	highlighted.y = glm::floor((this->m_camera.position.y - 0.2f + 2.0f * sinf(-this->m_camera.rotation.x)) / 0.5f) * 0.5f + 0.25f;
-	highlighted.z = glm::floor((this->m_camera.position.z + 2.0f * cosf(-this->m_camera.rotation.x) * cosf(-this->m_camera.rotation.y)) / 0.5f) * 0.5f;
+	this->m_highlighted.x = glm::floor((this->m_camera.position.x + 2.0f * cosf(-this->m_camera.rotation.x) * sinf(-this->m_camera.rotation.y)) / 0.5f) * 0.5f + 0.25f;
+	this->m_highlighted.y = glm::floor((this->m_camera.position.y - 0.2f + 2.0f * sinf(-this->m_camera.rotation.x)) / 0.5f) * 0.5f + 0.25f;
+	this->m_highlighted.z = glm::floor((this->m_camera.position.z + 2.0f * cosf(-this->m_camera.rotation.x) * cosf(-this->m_camera.rotation.y)) / 0.5f) * 0.5f;
+
+	if(-this->m_highlighted.x < -0.75f)
+		this->m_highlighted.x = 0.75f;
+	else if(-this->m_highlighted.x > 0.75f)
+		this->m_highlighted.x = -0.75f;
+
+	if(-this->m_highlighted.y > 1.75f)
+		this->m_highlighted.y = -1.75f;
+	else if(-this->m_highlighted.y < -1.75f)
+		this->m_highlighted.y = 1.75f;
 }

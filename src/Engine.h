@@ -47,7 +47,7 @@ namespace Geodash3
 		//Mouse position
 		double m_mouseX, m_mouseY;
 		//Highlighted cube
-		glm::vec3 highlighted;
+		glm::vec3 m_highlighted;
 
 		//Game window
 		GLFWwindow *m_gameWindow;

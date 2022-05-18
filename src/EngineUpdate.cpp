@@ -17,10 +17,10 @@ void Geodash3::Engine::m_Update()
 		this->m_cameraPitchSpeed = -0.000005f * (float)(tempMouseY - this->m_mouseY);
 	
 
-		if(this->m_camera.rotation.x < -3.14159f / 4.0f)
-			this->m_camera.rotation.x = -3.14159f / 4.0f;
-		if(this->m_camera.rotation.x > 3.14159f / 4.0f)
-			this->m_camera.rotation.x = 3.14159f / 4.0f;
+		if(this->m_camera.rotation.x < -3.14159f / 2.0f)
+			this->m_camera.rotation.x = -3.14159f / 2.0f;
+		if(this->m_camera.rotation.x > 3.14159f / 2.0f)
+			this->m_camera.rotation.x = 3.14159f / 2.0f;
 	}
 	else
 	{
@@ -29,4 +29,9 @@ void Geodash3::Engine::m_Update()
 	}
 	this->m_mouseX = tempMouseX;
 	this->m_mouseY = tempMouseY;
+
+	//Current highlighted block	
+	highlighted.x = glm::floor((this->m_camera.position.x + 2.0f * cosf(-this->m_camera.rotation.x) * sinf(-this->m_camera.rotation.y)) / 0.5f) * 0.5f + 0.25f;
+	highlighted.y = glm::floor((this->m_camera.position.y - 0.2f + 2.0f * sinf(-this->m_camera.rotation.x)) / 0.5f) * 0.5f + 0.25f;
+	highlighted.z = glm::floor((this->m_camera.position.z + 2.0f * cosf(-this->m_camera.rotation.x) * cosf(-this->m_camera.rotation.y)) / 0.5f) * 0.5f;
 }

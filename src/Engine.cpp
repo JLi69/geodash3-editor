@@ -76,15 +76,19 @@ Geodash3::Engine::Engine()
 		static_cast<Engine*>(glfwGetWindowUserPointer(win))->m_HandleKeyInput(win, key, scancode, action, mods);
 	};
 	glfwSetKeyCallback(m_gameWindow, keyInputFunc);
+	//Set up mouse input
+	auto mouseInputFunc = [](GLFWwindow* win, int button, int action, int mods)
+	{
+		static_cast<Engine*>(glfwGetWindowUserPointer(win))->m_HandleMouseInput(win, button, action, mods);
+	};
+	glfwSetMouseButtonCallback(this->m_gameWindow, mouseInputFunc);
 
 	//Set up the camera
 	this->m_camera.position = glm::vec3(0.0f, 0.0f, 0.0f);
 	this->m_camera.movement = glm::vec3(0.0f, 0.0f, 0.0f);
+	this->m_camera.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	//Hide cursor
 	glfwSetInputMode(this->m_gameWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwGetCursorPos(this->m_gameWindow, &this->m_mouseX, &this->m_mouseY);
-
-	//TEST - DELETE LATER
-	this->m_level.blocks.push_back(Geodash3::Block(glm::vec3(-0.75f, -1.75f, -4.0f)));
 }

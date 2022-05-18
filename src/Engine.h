@@ -19,6 +19,13 @@
 
 namespace Geodash3
 {
+	enum class Mode
+	{
+		NORMAL,
+		EDIT,
+		DESTROY
+	};
+
 	class Engine
 	{
 		//Use this matrix to convert 3D coordinates into 2D
@@ -32,6 +39,7 @@ namespace Geodash3
 		//Preallocated model view matrix
 		glm::mat4 m_modelViewMat;
 
+		Geodash3::Mode m_editMode = Geodash3::Mode::NORMAL;
 		//Camera
 		Geodash3::GameObject m_camera;
 		float m_cameraRotationSpeed = 0.0f,
@@ -62,6 +70,9 @@ namespace Geodash3
 
 		//Handle key input
 		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);
+		
+		//Handle mouse input
+		void m_HandleMouseInput(GLFWwindow* win, int button, int action, int mods);
 
 		//Render game objects onto the screen
 		void m_Display();

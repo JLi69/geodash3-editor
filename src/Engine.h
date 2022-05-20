@@ -69,9 +69,9 @@ namespace Geodash3
 		//Level
 		int m_currentLevel = 0;
 		Geodash3::Level m_level; //Level being edited
-
-		//Number of seconds to draw the frame
-		float m_secondsToDrawFrame = 1.0f;
+	
+		float m_secondsToDrawFrame = 1.0f, //Number of seconds to draw the frame
+			  m_previewRotation = 0.0f; //Rotation of a preview block
 
 		//Handle key input
 		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);

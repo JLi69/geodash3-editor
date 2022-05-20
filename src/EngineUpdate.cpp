@@ -3,6 +3,9 @@
 
 void Geodash3::Engine::m_Update()
 {
+	//Rotate the preview
+	this->m_previewRotation += 0.0005f * 1.0f / this->m_secondsToDrawFrame;
+
 	//Update the camera
 	this->m_camera.position += this->m_camera.movement * 1.0f / this->m_secondsToDrawFrame;
 	//Rotate the camera

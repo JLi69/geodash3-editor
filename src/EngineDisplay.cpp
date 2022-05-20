@@ -73,8 +73,7 @@ void Geodash3::Engine::m_Display()
 	if(this->m_editMode != Geodash3::Mode::NORMAL)
 	{
 		GL_CALL(glUseProgram(m_white.GetId()));	
-		GL_CALL(glUniformMatrix4fv(m_white.GetUniformLocation("u_PerspectiveMat"), 1, false, glm::value_ptr(m_perspectiveMat)));
-	
+		GL_CALL(glUniformMatrix4fv(m_white.GetUniformLocation("u_PerspectiveMat"), 1, false, glm::value_ptr(m_perspectiveMat)));	
 		m_modelViewMat = m_rotationMatrix *
 				   		 glm::rotate(glm::mat4(1.0f), -this->m_camera.rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)) * 
 				   		 glm::rotate(glm::mat4(1.0f), this->m_camera.rotation.y, glm::vec3(0.0f, 1.0f, 0.0f)) * 
@@ -82,20 +81,35 @@ void Geodash3::Engine::m_Display()
 				   		 glm::translate(glm::mat4(1.0f), -this->m_highlighted) *
 				   		 m_viewMatrix *  
 				  		 glm::scale(glm::mat4(1.0f), glm::vec3(0.25f, 0.25f, 0.25f));
-		GL_CALL(glUniformMatrix4fv(m_white.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));	
-		
-		if(this->m_currentBlockType != SPIKE)
-		{
-			GL_CALL(glFrontFace(GL_CW));
-			GL_CALL(this->m_cube.Enable());
-			GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));
-		}
-		else if(this->m_currentBlockType == SPIKE)
-		{
-			GL_CALL(glFrontFace(GL_CCW));
-			GL_CALL(this->m_pyramid.Enable());
-			GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 18));	
-		}
+		GL_CALL(glUniformMatrix4fv(m_white.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));		
+		GL_CALL(glFrontFace(GL_CW));
+		GL_CALL(this->m_cube.Enable());
+		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));	
+	}
+
+	//Display the preview block
+	m_modelViewMat = glm::translate(glm::mat4(1.0f), glm::vec3(-0.085f, -0.045f, -0.12f)) *
+					 glm::rotate(glm::mat4(1.0f), this->m_previewRotation, glm::vec3(0.0f, 1.0f, 0.0f)) *  
+					 m_viewMatrix * 
+				  	 glm::scale(glm::mat4(1.0f), glm::vec3(0.005f, 0.005f, 0.005f));
+	
+	if(this->m_currentBlockType != SPIKE)
+	{
+		GL_CALL(glFrontFace(GL_CW));
+		GL_CALL(this->m_cube.Enable());
+		GL_CALL(glUseProgram(m_basic3D.GetId()));
+		GL_CALL(glUniform4f(m_basic3D.GetUniformLocation("u_Color"), 0.6f, 0.6f, 0.6f, 1.0f));
+		GL_CALL(glUniformMatrix4fv(m_basic3D.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));
+		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));
+	}
+	else if(this->m_currentBlockType == SPIKE)
+	{
+		GL_CALL(glFrontFace(GL_CCW));
+		GL_CALL(this->m_pyramid.Enable());
+		GL_CALL(glUseProgram(m_basicPyramid3D.GetId()));	
+		GL_CALL(glUniform4f(m_basic3D.GetUniformLocation("u_Color"), 1.0f, 0.0f, 0.0f, 1.0f));	
+		GL_CALL(glUniformMatrix4fv(m_basicPyramid3D.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));
+		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 18));
 	}
 
 	//GLFW stuff

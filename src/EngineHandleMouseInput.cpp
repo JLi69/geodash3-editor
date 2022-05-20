@@ -30,17 +30,18 @@ void Geodash3::Engine::m_HandleMouseInput(GLFWwindow* win, int button, int actio
 	//Place a block
 	else if(button == GLFW_MOUSE_BUTTON_RIGHT)
 	{
+		//make sure that there is not an object in the current location
 		bool canPlace = true;
-	
+		//Check through all the blocks	
 		for(int i = 0; i < this->m_level.blocks.size() && canPlace; i++)
 			if(this->m_level.blocks.at(i).position == -this->m_highlighted)
 				canPlace = false;
-
+		//Check through all the spikes
 		for(int i = 0; i < this->m_level.spikes.size() && canPlace; i++)
 			if(this->m_level.spikes.at(i).position == -this->m_highlighted)
 				canPlace = false;
 
-		if(this->m_currentBlockType == BLOCK1)
+		if(this->m_currentBlockType != SPIKE)
 		{
 			if(canPlace)
 				this->m_level.blocks.push_back(Geodash3::Block(-this->m_highlighted));

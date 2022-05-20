@@ -85,6 +85,12 @@ Geodash3::Engine::Engine()
 		static_cast<Engine*>(glfwGetWindowUserPointer(win))->m_HandleMouseInput(win, button, action, mods);
 	};
 	glfwSetMouseButtonCallback(this->m_gameWindow, mouseInputFunc);
+	//Set up scroll input
+	auto scrollInputFunc = [](GLFWwindow* win, double xoffset, double yoffset)
+	{
+		static_cast<Engine*>(glfwGetWindowUserPointer(win))->m_HandleScrollInput(win, xoffset, yoffset);	
+	};
+	glfwSetScrollCallback(this->m_gameWindow, scrollInputFunc);
 
 	//Set up the camera
 	this->m_camera.position = glm::vec3(0.0f, 0.0f, 0.0f);

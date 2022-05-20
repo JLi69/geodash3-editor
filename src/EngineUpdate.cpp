@@ -46,7 +46,7 @@ void Geodash3::Engine::m_Update()
 	this->m_highlighted.x = glm::floor((this->m_camera.position.x + 2.0f * cosf(-this->m_camera.rotation.x) * sinf(-this->m_camera.rotation.y)) / 0.5f) * 0.5f + 0.25f;
 	this->m_highlighted.y = glm::floor((this->m_camera.position.y - 0.2f + 2.0f * sinf(-this->m_camera.rotation.x)) / 0.5f) * 0.5f + 0.25f;
 	this->m_highlighted.z = glm::floor((this->m_camera.position.z + 2.0f * cosf(-this->m_camera.rotation.x) * cosf(-this->m_camera.rotation.y)) / 0.5f) * 0.5f;
-
+	
 	if(-this->m_highlighted.x < -0.75f)
 		this->m_highlighted.x = 0.75f;
 	else if(-this->m_highlighted.x > 0.75f)

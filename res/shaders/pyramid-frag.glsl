@@ -25,4 +25,6 @@ void main()
 		-fragPos.x + 0.5 - fragPos.z + 0.5 <= fragPos.y + 0.5 &&
 		-fragPos.x + 0.5 - fragPos.z + 0.5 >= fragPos.y - 0.5) 
 		o_Color *= 0.5;
+
+	o_Color.a = 1.0;
 }

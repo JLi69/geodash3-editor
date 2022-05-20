@@ -17,13 +17,18 @@
 //Field of vision of the camera = 60 degrees
 #define FOV 55.0f
 
+//Block types
+#define BLOCK1 0
+#define BLOCK2 1
+#define BLOCK3 2
+#define SPIKE 3
+
 namespace Geodash3
 {
 	enum class Mode
 	{
 		NORMAL,
-		EDIT,
-		DESTROY
+		EDIT	
 	};
 
 	class Engine
@@ -73,6 +78,10 @@ namespace Geodash3
 		
 		//Handle mouse input
 		void m_HandleMouseInput(GLFWwindow* win, int button, int action, int mods);
+
+		//Handle mouse scroll
+		int m_currentBlockType = BLOCK1;
+		void m_HandleScrollInput(GLFWwindow* win, double xoffset, double yoffset);
 
 		//Render game objects onto the screen
 		void m_Display();

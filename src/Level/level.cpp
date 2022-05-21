@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 
-Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath)
+Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath, bool &success)
 {
 	std::ifstream levelFile(levelFilePath); //Open the file that contains the level data
 
@@ -12,7 +12,8 @@ Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath)
 	//File failed to open
 	if(!levelFile.is_open())
 	{
-		std::cout << "Failed to open file: " << levelFilePath << '\n';	
+		std::cout << "Failed to open file: " << levelFilePath << '\n';
+		success = false;
 		return loaded; //Return empty level	
 	}
 
@@ -39,13 +40,13 @@ Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath)
 			case '#':
 				loaded.blocks.push_back(Geodash3::Block(glm::vec3(glm::floor((float)currentLine / 12.0f) * 0.5f - 0.75f,
 																  -1.75f + 0.5f * (float)(11 - currentLine % 12),
-																  -(float)i * 0.5f - 32.0f)));
+																  -(float)i * 0.5f - 4.0f)));
 				break;
 			//Spike
 			case '^':
 				loaded.spikes.push_back(Geodash3::Spike(glm::vec3(glm::floor((float)currentLine / 12.0f) * 0.5f - 0.75f,
 														-1.75f + 0.5f * (float)(11 - currentLine % 12),
-														-(float)i * 0.5f - 32.0f)));
+														-(float)i * 0.5f - 4.0f)));
 				break;
 			//Nothing
 			default:
@@ -61,5 +62,6 @@ Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath)
 	//Close the file
 	levelFile.close();
 
+	success = true;
 	return loaded;
 }

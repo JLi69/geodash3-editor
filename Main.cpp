@@ -15,6 +15,8 @@ int main(int argc, char *argv[])
 	//One argument: the name of the file that the program will
 	//output the level contents into
 	case 2:
+		gameEngine.Read(argv[1]);
+		gameEngine.Run();
 		break;
 	//Invalid argument count
 	default:

@@ -14,5 +14,5 @@ namespace Geodash3
 	};
 
 	//Load a level from a file
-	Geodash3::Level LoadLevel(std::string levelFilePath);
+	Geodash3::Level LoadLevel(std::string levelFilePath, bool &success);
 }

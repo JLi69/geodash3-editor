@@ -2,6 +2,9 @@
 #include <chrono>
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <cstdlib>
+#include <ctime>
 
 //Main loop
 void Geodash3::Engine::Run()
@@ -100,4 +103,15 @@ Geodash3::Engine::Engine()
 	//Hide cursor
 	glfwSetInputMode(this->m_gameWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwGetCursorPos(this->m_gameWindow, &this->m_mouseX, &this->m_mouseY);
+
+	//Generate a random path for the file
+	std::stringstream randPath;	
+	srand(time(NULL)); //Generate seed
+	randPath << "custom-";	
+	for(int i = 0; i < 32; i++)
+		randPath << (char)(rand() % ((int)('z' - 'a') + 1) + (int)'a');
+	randPath << ".lvl";
+	
+	//test
+	std::cout << randPath.str() << '\n';
 }

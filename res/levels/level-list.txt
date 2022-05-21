@@ -1,2 +1,0 @@
-res/levels/tutorial.lvl
-res/levels/level0.lvl

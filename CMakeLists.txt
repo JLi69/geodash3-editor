@@ -27,6 +27,7 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/EngineHandleMouseInput.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineHandleScrollInput.cpp	
 	${PROJECT_SOURCE_DIR}/src/EngineUpdate.cpp
+	${PROJECT_SOURCE_DIR}/src/EngineSaveFile.cpp
 
 	#Gameobjects
 	${PROJECT_SOURCE_DIR}/src/GameObject/Block.cpp

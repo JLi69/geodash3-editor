@@ -83,6 +83,9 @@ namespace Geodash3
 		int m_currentBlockType = BLOCK1;
 		void m_HandleScrollInput(GLFWwindow* win, double xoffset, double yoffset);
 
+		//Save and open files
+		std::string m_path; //Path to the save file
+
 		//Render game objects onto the screen
 		void m_Display();
 		//Update the game objects
@@ -90,6 +93,11 @@ namespace Geodash3
 	public:
 		//Run the main game loop
 		void Run();
+
+		bool Read(std::string path); //Read from a save file
+									 //returns true if successful,
+									 //false if otherwise
+		void Write(); //Save level to file
 
 		//Constructor
 		Engine();

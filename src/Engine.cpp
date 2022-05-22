@@ -29,7 +29,7 @@ void Geodash3::Engine::Run()
 		this->m_Display();
 		this->m_Update();
 		//Output frames per second
-		std::cout << "Frames Per Second: " << 1.0f / this->m_secondsToDrawFrame << '\n';
+		//std::cout << "Frames Per Second: " << 1.0f / this->m_secondsToDrawFrame << '\n';
 		//End of frame
 		std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
 		//Calculate number of seconds to draw the frame
@@ -108,9 +108,11 @@ Geodash3::Engine::Engine()
 	std::stringstream randPath;	
 	srand(time(NULL)); //Generate seed
 	randPath << "custom-";	
-	for(int i = 0; i < 32; i++)
+	for(int i = 0; i < 16; i++)
 		randPath << (char)(rand() % ((int)('z' - 'a') + 1) + (int)'a');
 	randPath << ".lvl";
+
+	this->m_path = randPath.str();
 	
 	//test
 	std::cout << randPath.str() << '\n';

@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <map>
 #include <cmath>
+#include <iostream>
 
 void Geodash3::Engine::m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods)
 {
@@ -64,4 +65,11 @@ void Geodash3::Engine::m_HandleKeyInput(GLFWwindow* win, int key, int scancode, 
 		this->m_editMode = Geodash3::Mode::NORMAL;
 	if(s_keyPressed[GLFW_KEY_2])
 		this->m_editMode = Geodash3::Mode::EDIT;
+
+	//CTRL + E to save to a file
+	if(s_keyPressed[GLFW_KEY_LEFT_CONTROL] && s_keyPressed[GLFW_KEY_E] || s_keyPressed[GLFW_KEY_RIGHT_CONTROL] && s_keyPressed[GLFW_KEY_E])
+	{
+		std::cout << "Attempted to save file\n";
+		this->Write();
+	}
 }

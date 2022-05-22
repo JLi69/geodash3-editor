@@ -42,8 +42,8 @@ void Geodash3::Engine::m_Update()
 
 	if(this->m_camera.position.y > 1.5f)
 		this->m_camera.position.y = 1.5f;
-	else if(this->m_camera.position.y < -2.5f)
-		this->m_camera.position.y = -2.5f;
+	else if(this->m_camera.position.y < -4.5f)
+		this->m_camera.position.y = -4.5f;
 
 	//Current highlighted block	
 	this->m_highlighted.x = glm::floor((this->m_camera.position.x + 2.0f * cosf(-this->m_camera.rotation.x) * sinf(-this->m_camera.rotation.y)) / 0.5f) * 0.5f + 0.25f;
@@ -55,8 +55,8 @@ void Geodash3::Engine::m_Update()
 	else if(-this->m_highlighted.x > 0.75f)
 		this->m_highlighted.x = -0.75f;
 
-	if(-this->m_highlighted.y > 1.75f)
-		this->m_highlighted.y = -1.75f;
+	if(-this->m_highlighted.y > 3.75f)
+		this->m_highlighted.y = -3.75f;
 	else if(-this->m_highlighted.y < -1.75f)
 		this->m_highlighted.y = 1.75f;
 }

@@ -6,7 +6,7 @@
 void Geodash3::Engine::m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods)
 {
 	static std::map<int, bool> s_keyPressed; //True if key is being held down, false if key isn't being held down
-	const float speed = 0.002f; //Speed of the player
+	const float speed = 6.0f; //Speed of the player
 	
 	if(action == GLFW_PRESS)
 		s_keyPressed[key] = true;
@@ -47,9 +47,9 @@ void Geodash3::Engine::m_HandleKeyInput(GLFWwindow* win, int key, int scancode, 
 
 	//Move camera up and down
 	if(s_keyPressed[GLFW_KEY_SPACE])
-		this->m_camera.movement.y = -0.002f;
+		this->m_camera.movement.y = -4.0f;
 	else if(s_keyPressed[GLFW_KEY_LEFT_SHIFT])
-		this->m_camera.movement.y = 0.002f;
+		this->m_camera.movement.y = 4.0f;
 	else
 		this->m_camera.movement.y = 0.0f;
 

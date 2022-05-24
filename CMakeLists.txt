@@ -4,6 +4,12 @@ cmake_minimum_required(VERSION 3.10)
 #Name of project
 project(gdash3-editor)
 
+include_directories(${CMAKE_SOURCE_DIR}/dependencies/include)
+
+find_package(OpenGL REQUIRED)
+
+set(CMAKE_CXX_FLAGS "-mwindows -O2")
+
 #Create the executable
 add_executable(
 	${PROJECT_NAME} #Name of executable
@@ -24,6 +30,7 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/Engine.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineDisplay.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineKeyInput.cpp
+	${PROJECT_SOURCE_DIR}/src/EngineUpdate.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineHandleMouseInput.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineHandleScrollInput.cpp	
 	${PROJECT_SOURCE_DIR}/src/EngineUpdate.cpp
@@ -38,5 +45,17 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/Level/level.cpp
 )
 
-#Libraries to link with the project
-target_link_libraries(${PROJECT_NAME} GL dl glfw SOIL) 
+link_libraries(gdi32)
+target_link_libraries(${PROJECT_NAME} user32 kernel32 winspool.lib
+						comdlg32 advapi32 shell32 ole32 oleaut32
+						uuid odbc32 odbccp32 opengl32)
+target_link_libraries(${PROJECT_NAME} OpenGL::GL)
+target_link_libraries(${PROJECT_NAME} glfw3)
+
+#find_library(glfw3lib glfw3 PATHS ${CMAKE_SOURCE_DIR}/dependencies/lib-vc2019)
+#if(${glfw3lib} STREQUAL glfw3lib-NOTFOUND)
+#	message(FATAL "glfw not found!")
+#else()
+#	message("glfw found at " ${glfw3lib})
+#	target_link_libraries(${PROJECT_NAME} ${glfw3lib})
+#endif()

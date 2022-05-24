@@ -3,6 +3,12 @@ geodash3
 gdash3-editor
 *.cmake
 
+#for windows
+.vs
+gdash3-editor.exe
+out
+*~
+
 #ignore all txt files
 *.txt
 #except for CMakeLists.txt

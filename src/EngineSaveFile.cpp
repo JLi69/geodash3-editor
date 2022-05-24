@@ -78,6 +78,7 @@ void Geodash3::Engine::Write()
 		currentZ = 0;
 	}
 
+	//Write to the file
 	for(int i = 0; i < 48; i++)
 	{
 		saveFile << lines[i].str() << '\n';

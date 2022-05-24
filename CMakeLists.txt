@@ -8,7 +8,11 @@ include_directories(${CMAKE_SOURCE_DIR}/dependencies/include)
 
 find_package(OpenGL REQUIRED)
 
-set(CMAKE_CXX_FLAGS "-mwindows -O2")
+if(${CMAKE_HOST_SYSTEM} STREQUAL "Windows")
+	set(CMAKE_CXX_FLAGS "-mwindows -O2")
+else()
+	set(CMAKE_CXX_FLAGS "-O2")
+endif()
 
 #Create the executable
 add_executable(
@@ -45,12 +49,18 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/Level/level.cpp
 )
 
-link_libraries(gdi32)
-target_link_libraries(${PROJECT_NAME} user32 kernel32 winspool.lib
+message("Host system: " ${CMAKE_HOST_SYSTEM})
+
+if(${CMAKE_HOST_SYSTEM} STREQUAL "Windows")
+	link_libraries(gdi32)
+	target_link_libraries(${PROJECT_NAME} user32 kernel32 winspool.lib
 						comdlg32 advapi32 shell32 ole32 oleaut32
 						uuid odbc32 odbccp32 opengl32)
-target_link_libraries(${PROJECT_NAME} OpenGL::GL)
-target_link_libraries(${PROJECT_NAME} glfw3)
+	target_link_libraries(${PROJECT_NAME} OpenGL::GL)
+	target_link_libraries(${PROJECT_NAME} glfw3)
+else()
+	target_link_libraries(${PROJECT_NAME} glfw)
+endif()
 
 #find_library(glfw3lib glfw3 PATHS ${CMAKE_SOURCE_DIR}/dependencies/lib-vc2019)
 #if(${glfw3lib} STREQUAL glfw3lib-NOTFOUND)

@@ -9,7 +9,7 @@ include_directories(${CMAKE_SOURCE_DIR}/dependencies/include)
 find_package(OpenGL REQUIRED)
 
 if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
-	set(CMAKE_CXX_FLAGS "-mwindows -O2")
+	set(CMAKE_CXX_FLAGS "-mwindows -O2 -static-libstdc++ -static-libgcc")
 else()
 	set(CMAKE_CXX_FLAGS "-O2")
 endif()
@@ -49,9 +49,7 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/Level/level.cpp
 )
 
-message("Host system: " ${CMAKE_HOST_SYSTEM})
-
-if(${CMAKE_HOST_SYSTEM} STREQUAL "Windows")
+if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
 	link_libraries(gdi32)
 	target_link_libraries(${PROJECT_NAME} user32 kernel32 winspool.lib
 						comdlg32 advapi32 shell32 ole32 oleaut32

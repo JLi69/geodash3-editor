@@ -1,6 +1,7 @@
 #include "level.h"
 #include <fstream>
 #include <iostream>
+#include <cmath>
 
 Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath, bool &success)
 {
@@ -28,28 +29,38 @@ Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath, bool &success)
 		//Ignore empty lines
 		if(line.size() == 0)
 			continue;
+		if((int)line[0] == 13)
+			continue;
 
 		end = line.size() > end ? line.size() : end;
 
 		//Read the line
+		int index = 0;
 		for(int i = 0; i < line.size(); i++)
 		{
 			switch(line[i])
 			{
 			//Block
 			case '#':
-				loaded.blocks.push_back(Geodash3::Block(glm::vec3(glm::floor((float)currentLine / 12.0f) * 0.5f - 0.75f,
+				loaded.blocks.push_back(Geodash3::Block(glm::vec3(floorf((float)currentLine / 12.0f) * 0.5f - 0.75f,
 																  -1.75f + 0.5f * (float)(11 - currentLine % 12),
-																  -(float)i * 0.5f - 4.0f)));
+																  -(float)index * 0.5f - 4.0f)));
+				index++;
 				break;
 			//Spike
 			case '^':
-				loaded.spikes.push_back(Geodash3::Spike(glm::vec3(glm::floor((float)currentLine / 12.0f) * 0.5f - 0.75f,
+				loaded.spikes.push_back(Geodash3::Spike(glm::vec3(floorf((float)currentLine / 12.0f) * 0.5f - 0.75f,
 														-1.75f + 0.5f * (float)(11 - currentLine % 12),
-														-(float)i * 0.5f - 4.0f)));
+														-(float)index * 0.5f - 4.0f)));
+				index++;
 				break;
-			//Nothing
+			//Empty space
+			case '.':
+				index++;
+				break;
+			//Unkown char!
 			default:
+				std::cout << "[line:" << currentLine + 1 << "]" <<  " Unknown char: " << (int)line[i] << '\n'; 
 				break;
 			}
 		}

@@ -16,9 +16,13 @@ void Geodash3::Engine::m_Update()
 	glfwGetCursorPos(this->m_gameWindow, &tempMouseX, &tempMouseY);
 	if(glfwGetInputMode(this->m_gameWindow, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
 	{
+#ifndef WINDOWS
 		this->m_cameraRotationSpeed = 0.1f * (float)(tempMouseX - this->m_mouseX);
 		this->m_cameraPitchSpeed = -0.1f * (float)(tempMouseY - this->m_mouseY);
-	
+#else
+		this->m_cameraRotationSpeed = 0.8f * (float)(tempMouseX - this->m_mouseX);
+		this->m_cameraPitchSpeed = -0.8f * (float)(tempMouseY - this->m_mouseY);
+#endif
 
 		if(this->m_camera.rotation.x < -3.14159f / 2.0f)
 			this->m_camera.rotation.x = -3.14159f / 2.0f;

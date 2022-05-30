@@ -12,6 +12,8 @@ void Geodash3::Engine::m_Display()
 	GL_CALL(glUseProgram(m_basic3D.GetId()));
 
 	//Draw the ground
+	GL_CALL(m_cubeCoords.Enable());
+	GL_CALL(m_ground.ActivateTexture(GL_TEXTURE0));
 	GL_CALL(glFrontFace(GL_CW));
 	GL_CALL(glUniformMatrix4fv(m_basic3D.GetUniformLocation("u_PerspectiveMat"), 1, false, glm::value_ptr(m_perspectiveMat)));
 	m_modelViewMat = m_rotationMatrix *
@@ -27,6 +29,7 @@ void Geodash3::Engine::m_Display()
 	GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));	
 
 	//Display the block
+	GL_CALL(m_blocks[0].ActivateTexture(GL_TEXTURE0));
 	for(auto block : this->m_level.blocks)
 	{
 		m_modelViewMat = m_rotationMatrix *
@@ -46,6 +49,8 @@ void Geodash3::Engine::m_Display()
 	}
 
 	//Display the spikes
+	GL_CALL(m_pyrCoords.Enable());
+	GL_CALL(m_spike.ActivateTexture(GL_TEXTURE0));
 	GL_CALL(glFrontFace(GL_CCW));
 	GL_CALL(this->m_pyramid.Enable());
 	GL_CALL(glUseProgram(m_basicPyramid3D.GetId()));
@@ -95,6 +100,9 @@ void Geodash3::Engine::m_Display()
 	
 	if(this->m_currentBlockType != SPIKE)
 	{
+		GL_CALL(this->m_cubeCoords.Enable());
+		GL_CALL(this->m_blocks[this->m_currentBlockType].ActivateTexture(GL_TEXTURE0));
+
 		GL_CALL(glFrontFace(GL_CW));
 		GL_CALL(this->m_cube.Enable());
 		GL_CALL(glUseProgram(m_basic3D.GetId()));

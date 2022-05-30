@@ -75,6 +75,22 @@ Geodash3::Engine::Engine()
 	GL_CALL(m_basic3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/basic-frag.glsl"));
 	GL_CALL(m_white.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/white.glsl"));
 
+	//Set up the textures
+	GL_CALL(m_ground = TextureObj("res/textures/ground.png"));
+	GL_CALL(m_blocks[0] = TextureObj("res/textures/block1.png"));
+	GL_CALL(m_blocks[1] = TextureObj("res/textures/block2.png"));	
+	GL_CALL(m_blocks[2] = TextureObj("res/textures/block3.png"));	
+	GL_CALL(m_spike = TextureObj("res/textures/spike.png"));
+
+	//Set up the texture coordinates
+	//Cube texture coordinates	
+	GL_CALL(m_cubeCoords.GenBuffer());
+	GL_CALL(m_cubeCoords.Data(&Geodash3::texCubeCoords[0], sizeof(Geodash3::texCubeCoords), 2));
+	//Pyramid texture coordinates	
+	GL_CALL(m_pyrCoords.GenBuffer());
+	GL_CALL(m_pyrCoords.Data(&Geodash3::texPyrCoords[0], sizeof(Geodash3::texPyrCoords), 2));
+
+	//Set up the user input
 	//Set up key input
 	glfwSetWindowUserPointer(this->m_gameWindow, this);
 	auto keyInputFunc = [](GLFWwindow* win, int key, int scancode, int action, int mods)

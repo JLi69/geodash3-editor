@@ -27,6 +27,11 @@ unsigned int VertexBufferObj::GetId()
 	return this->m_id;
 }
 
+int VertexBufferObj::GetVertSize()
+{
+	return this->m_vertSize;
+}
+
 void VertexBufferObj::GenBuffer()
 {
 	glGenBuffers(1, &this->m_id);

@@ -31,6 +31,36 @@ namespace Geodash3
 		1.0f, -1.0f, 1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f // base – right back
 	};
 
+	//Texture coordinates for a cube
+	const float texCubeCoords[72] = 
+	{
+		 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+		 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+
+		 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+		 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 
+		 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+		 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 
+		 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+		 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 
+		 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+		 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 
+		 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+		 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f 
+	};
+
+	//Texture coordinates for a pyramid
+	const float texPyrCoords[36] =
+	{
+		0.0f, 0.0f, 1.0f, 0.0f, 0.5f, 1.0f,		0.0f, 0.0f, 1.0f, 0.0f, 0.5f, 1.0f, //top and right faces
+		0.0f, 0.0f, 1.0f, 0.0f, 0.5f, 1.0f,		0.0f, 0.0f, 1.0f, 0.0f, 0.5f, 1.0f, //back and left faces
+		0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f,		1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f //base triangles	
+	};
+
 	//Initialize variables
 	void init(GLFWwindow *&win, const char *title, GLFWwindowsizefun onWindowResize);
 }

@@ -3,11 +3,11 @@
 void Geodash3::Engine::m_HandleScrollInput(GLFWwindow* win, double xoffset, double yoffset)
 {
 	//Detect vertical scrolling
-	if(yoffset > 0.0)
+	if(yoffset > 0.9)
 	{
 		this->m_currentBlockType++;
 	}
-	else if(yoffset < 0.0)
+	else if(yoffset < -0.9)
 	{
 		this->m_currentBlockType--;	
 	}

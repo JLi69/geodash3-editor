@@ -26,6 +26,9 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/GL-Utils/Shader.cpp
 	${PROJECT_SOURCE_DIR}/src/GL-Utils/VertexBufferObj.cpp
 	${PROJECT_SOURCE_DIR}/src/GL-Utils/GetOpenGLError.cpp
+	#Textures
+	${PROJECT_SOURCE_DIR}/src/GL-Utils/Texture-Utils/TextureCoords.cpp
+	${PROJECT_SOURCE_DIR}/src/GL-Utils/Texture-Utils/TextureObj.cpp
 
 	#init
 	${PROJECT_SOURCE_DIR}/src/Init/init.cpp
@@ -57,7 +60,7 @@ if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
 	target_link_libraries(${PROJECT_NAME} OpenGL::GL)
 	target_link_libraries(${PROJECT_NAME} glfw3)
 else()
-	target_link_libraries(${PROJECT_NAME} glfw)
+	target_link_libraries(${PROJECT_NAME} glfw SOIL)
 endif()
 
 #find_library(glfw3lib glfw3 PATHS ${CMAKE_SOURCE_DIR}/dependencies/lib-vc2019)

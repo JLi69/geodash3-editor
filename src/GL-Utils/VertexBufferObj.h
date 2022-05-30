@@ -1,20 +1,24 @@
+#define INCLUDE_VERTEXBUFFOBJ
+
 class VertexBufferObj
 {
 	unsigned int m_id;
 	int m_vertSize; //How many floats are in a single vertex
 public:
 	//Binds the vertex buffer
-	void Bind();
+	virtual void Bind();
 	
 	//Enable the vertex buffer
-	void Enable();
+	virtual void Enable();
 	
 	//Returns the id of the vertex buffer
-	unsigned int GetId();
+	virtual unsigned int GetId();
+	//Returns the size of a vertex
+	virtual int GetVertSize();
 
 	//Sends data to the buffer
-	void Data(const float *dat, int size, int vSize);
+	virtual void Data(const float *dat, int size, int vSize);
 
 	//Generate the buffer
-	void GenBuffer();
+	virtual void GenBuffer();
 };

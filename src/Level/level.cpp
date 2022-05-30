@@ -34,29 +34,39 @@ Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath, bool &success)
 
 		end = line.size() > end ? line.size() : end;
 
-		//Read the line
-		int index = 0;
+		//Read the line	
 		for(int i = 0; i < line.size(); i++)
 		{
 			switch(line[i])
 			{
-			//Block
+			//Block 1
 			case '#':
 				loaded.blocks.push_back(Geodash3::Block(glm::vec3(floorf((float)currentLine / 12.0f) * 0.5f - 0.75f,
 																  -1.75f + 0.5f * (float)(11 - currentLine % 12),
-																  -(float)index * 0.5f - 4.0f)));
-				index++;
+																  -(float)i * 0.5f - 4.0f)));
+				break;
+			//Block 2
+			case '$':
+				loaded.blocks.push_back(Geodash3::Block(glm::vec3(floorf((float)currentLine / 12.0f) * 0.5f - 0.75f,
+																  -1.75f + 0.5f * (float)(11 - currentLine % 12),
+																  -(float)i * 0.5f - 4.0f)));
+				loaded.blocks.at(loaded.blocks.size() - 1).blockType = 1;	
+				break;
+			//Block 3
+			case '%':
+				loaded.blocks.push_back(Geodash3::Block(glm::vec3(floorf((float)currentLine / 12.0f) * 0.5f - 0.75f,
+																  -1.75f + 0.5f * (float)(11 - currentLine % 12),
+																  -(float)i * 0.5f - 4.0f)));
+				loaded.blocks.at(loaded.blocks.size() - 1).blockType = 2;		
 				break;
 			//Spike
 			case '^':
 				loaded.spikes.push_back(Geodash3::Spike(glm::vec3(floorf((float)currentLine / 12.0f) * 0.5f - 0.75f,
 														-1.75f + 0.5f * (float)(11 - currentLine % 12),
-														-(float)index * 0.5f - 4.0f)));
-				index++;
+														-(float)i * 0.5f - 4.0f)));	
 				break;
 			//Empty space
-			case '.':
-				index++;
+			case '.':	
 				break;
 			//Unkown char!
 			default:

@@ -16,12 +16,19 @@ void Geodash3::Engine::Write()
 {
 	std::vector<std::pair<glm::vec3, char>> objects[48];
 
+	//Blocks
 	for(auto block : this->m_level.blocks)
 	{
 		int tempX = (int)((block.position.x + 0.75f) / 0.5f),
 			tempY = (int)((block.position.y + 1.75f) / 0.5f) * -1 + 11;
-		objects[tempX * 12 + tempY].push_back({ block.position, '#' });
+
+		//Characters to represent the different types of blocks
+		char blockChars[] = { '#', '$', '%' };
+
+		objects[tempX * 12 + tempY].push_back({ block.position, blockChars[block.blockType] });		
 	}
+
+	//Spikes
 	for(auto spike : this->m_level.spikes)
 	{	
 		int tempX = (int)((spike.position.x + 0.75f) / 0.5f),

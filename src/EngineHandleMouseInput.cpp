@@ -44,7 +44,11 @@ void Geodash3::Engine::m_HandleMouseInput(GLFWwindow* win, int button, int actio
 		if(this->m_currentBlockType != SPIKE)
 		{
 			if(canPlace)
-				this->m_level.blocks.push_back(Geodash3::Block(-this->m_highlighted));
+			{
+				Geodash3::Block tempBlock = Geodash3::Block(-this->m_highlighted);
+				tempBlock.blockType = this->m_currentBlockType;
+				this->m_level.blocks.push_back(tempBlock);
+			}	
 		}
 		else if(this->m_currentBlockType == SPIKE)
 		{	

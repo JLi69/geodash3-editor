@@ -28,10 +28,11 @@ void Geodash3::Engine::m_Display()
 	GL_CALL(glUniform4f(m_basic3D.GetUniformLocation("u_Color"), 0.0f, 1.0f, 0.0f, 1.0f));
 	GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));	
 
-	//Display the block
-	GL_CALL(m_blocks[0].ActivateTexture(GL_TEXTURE0));
+	//Display the block	
 	for(auto block : this->m_level.blocks)
 	{
+		GL_CALL(m_blocks[block.blockType].ActivateTexture(GL_TEXTURE0));
+		
 		m_modelViewMat = m_rotationMatrix *
 						 glm::rotate(glm::mat4(1.0f), -this->m_camera.rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)) * 
 						 glm::rotate(glm::mat4(1.0f), this->m_camera.rotation.y, glm::vec3(0.0f, 1.0f, 0.0f)) * 

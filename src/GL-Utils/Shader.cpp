@@ -5,6 +5,7 @@
 #ifndef INCLUDE_GLAD
 #include <glad/glad.h>
 #endif
+#include "../File/OpenFile.h"
 
 unsigned int Shader::GetId()
 {
@@ -49,28 +50,9 @@ void Shader::m_PrintProgramLog(unsigned int program)
 
 bool Shader::m_ReadFile(std::string path, std::string &src)
 {
-	std::ifstream file(path);
-
-
-	//Failed to open file, try to open at HOME/.config/geodash3 instead
-#ifndef WINDOWS
-	if(!file.is_open())
-	{
-		std::stringstream newPath;
-		//get user's home directory	
-		const char* home = getenv("HOME");
-		newPath << home << "/.config/geodash3/" << path;
-		file = std::ifstream(newPath.str());
-	}
-#endif
-
-	//Failed to open file
-	if(!file.is_open())
-	{
-		std::cout << "Error: failed to open file: " << path << '\n';
-		return false; //Failed to open file
-	}
-
+	bool success;
+	std::ifstream file = Geodash3::OpenFile(path, success);
+	
 	std::stringstream contents; //Contents of the file
 	std::string line; //Current line of the file
 	while(std::getline(file, line))

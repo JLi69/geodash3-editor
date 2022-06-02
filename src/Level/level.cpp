@@ -4,31 +4,15 @@
 #include <cmath>
 #include <cstdlib>
 #include <sstream>
+#include "../File/OpenFile.h"
 
 Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath, bool &success)
 {
-	std::ifstream levelFile(levelFilePath); //Open the file that contains the level data
+	bool open;
+	std::ifstream levelFile = Geodash3::OpenFile(levelFilePath, open); //Open the file that contains the level data
 
 	Geodash3::Level loaded; //Level to be loaded
 	loaded.levelEnd = -32.0f;
-
-	//File failed to open
-	//If failed, try to open file in HOME/.config/geodash3
-#ifndef WINDOWS	
-	if(!levelFile.is_open())
-	{	
-		const char* home = getenv("HOME");
-		std::stringstream newPath;
-		newPath << home << "/.config/geodash3/" << levelFilePath;
-		levelFile = std::ifstream(newPath.str());
-	}
-#endif
-	if(!levelFile.is_open())
-	{
-		std::cout << "Failed to open file: " << levelFilePath << '\n';
-		success = false;
-		return loaded; //Return empty level	
-	}
 
 	//Read the level file
 	//levels are 4 wide, 80 long, and 12 high

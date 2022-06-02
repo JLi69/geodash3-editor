@@ -32,6 +32,9 @@ add_executable(
 
 	#init
 	${PROJECT_SOURCE_DIR}/src/Init/init.cpp
+	
+	#open file
+	${PROJECT_SOURCE_DIR}/src/File/OpenFile.cpp
 
 	#Engine
 	${PROJECT_SOURCE_DIR}/src/Engine.cpp
@@ -66,7 +69,7 @@ else()
 	install(TARGETS ${PROJECT_NAME}
 		DESTINATION /usr/bin)
 	install(DIRECTORY ${PROJECT_SOURCE_DIR}/res
-		DESTINATION $ENV{HOME}/.config/geodash3-editor) 
+		DESTINATION /etc/geodash3-editor) 
 endif()
 
 #find_library(glfw3lib glfw3 PATHS ${CMAKE_SOURCE_DIR}/dependencies/lib-vc2019)

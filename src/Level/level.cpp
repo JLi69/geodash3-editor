@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 #include <cmath>
+#include <cstdlib>
+#include <sstream>
 
 Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath, bool &success)
 {
@@ -11,6 +13,14 @@ Geodash3::Level Geodash3::LoadLevel(std::string levelFilePath, bool &success)
 	loaded.levelEnd = -32.0f;
 
 	//File failed to open
+	//If failed, try to open file in HOME/.config/geodash3
+	if(!levelFile.is_open())
+	{	
+		const char* home = getenv("HOME");
+		std::stringstream newPath;
+		newPath << home << "/.config/geodash3/" << levelFilePath;
+		levelFile = std::ifstream(newPath.str());
+	}
 	if(!levelFile.is_open())
 	{
 		std::cout << "Failed to open file: " << levelFilePath << '\n';

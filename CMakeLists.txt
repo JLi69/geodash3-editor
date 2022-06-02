@@ -61,7 +61,12 @@ if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
 	target_link_libraries(${PROJECT_NAME} OpenGL::GL)
 	target_link_libraries(${PROJECT_NAME} glfw3)
 else()
+	target_link_libraries(OpenGL::GL)
 	target_link_libraries(${PROJECT_NAME} glfw SOIL)
+	install(TARGETS ${PROJECT_NAME}
+		DESTINATION /usr/bin)
+	install(DIRECTORY ${PROJECT_SOURCE_DIR}/res
+		DESTINATION $ENV{HOME}/.config/geodash3-editor) 
 endif()
 
 #find_library(glfw3lib glfw3 PATHS ${CMAKE_SOURCE_DIR}/dependencies/lib-vc2019)

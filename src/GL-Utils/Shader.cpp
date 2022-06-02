@@ -51,6 +51,19 @@ bool Shader::m_ReadFile(std::string path, std::string &src)
 {
 	std::ifstream file(path);
 
+
+	//Failed to open file, try to open at HOME/.config/geodash3 instead
+#ifndef WINDOWS
+	if(!file.is_open())
+	{
+		std::stringstream newPath;
+		//get user's home directory	
+		const char* home = getenv("HOME");
+		newPath << home << "/.config/geodash3/" << path;
+		file = std::ifstream(newPath.str());
+	}
+#endif
+
 	//Failed to open file
 	if(!file.is_open())
 	{

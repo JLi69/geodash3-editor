@@ -1,12 +1,24 @@
 #include "TextureObj.h"
 #include <SOIL/SOIL.h>
 #include <iostream>
+#include <cstdlib>
+#include <sstream>
 
 bool TextureObj::OpenTexture(std::string texPath)
 {
 	//Load the opngl texture
 	this->m_id = SOIL_load_OGL_texture(texPath.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 	//Failed to open image file
+	//Try looking in HOME/.config/geodash3 on linux
+#ifndef WINDOWS
+	if(this->m_id == 0)
+	{
+		const char* home = getenv("HOME");
+		std::stringstream newPath;
+		newPath << home << "/.config/geodash3/" << texPath;
+		this->m_id = SOIL_load_OGL_texture(newPath.str().c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	}
+#endif
 	//Output error message
 	if(this->m_id == 0)
 		std::cout << "Failed to open image file: " << texPath << '\n';

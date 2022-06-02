@@ -11,7 +11,7 @@ find_package(OpenGL REQUIRED)
 if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
 	set(CMAKE_CXX_FLAGS "-mwindows -O2 -static-libstdc++ -static-libgcc -DWINDOWS")
 else()
-	set(CMAKE_CXX_FLAGS "-O2")
+	set(CMAKE_CXX_FLAGS "-O2 -static-libstdc++ -static-libgcc")
 endif()
 
 #Create the executable

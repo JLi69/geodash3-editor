@@ -16,4 +16,7 @@ out
 #and level-list.txt
 !level-list.txt
 
+#ignore directory where deb packages are built
+deb
+
 CMakeFiles

@@ -13,7 +13,10 @@ void Geodash3::Engine::m_HandleScrollInput(GLFWwindow* win, double xoffset, doub
 	}
 
 	if(this->m_currentBlockType < BLOCK1)
-		this->m_currentBlockType = BLOCK1;
+	{
+		this->m_currentBlockType += SPIKE + 1;
+		this->m_currentBlockType %= SPIKE + 1;
+	}
 	else if(this->m_currentBlockType > SPIKE)
-		this->m_currentBlockType = SPIKE;
+		this->m_currentBlockType %= SPIKE + 1;
 }

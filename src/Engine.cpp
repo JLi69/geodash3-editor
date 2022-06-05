@@ -69,6 +69,9 @@ Geodash3::Engine::Engine()
 	//Pyramid
 	GL_CALL(m_pyramid.GenBuffer());
 	GL_CALL(m_pyramid.Data(&Geodash3::pyramidVerts[0], sizeof(Geodash3::pyramidVerts), 3));
+	//Rectangle
+	GL_CALL(m_rect.GenBuffer());
+	GL_CALL(m_rect.Data(&Geodash3::rect[0], sizeof(Geodash3::rect), 3));
 
 	//Set up the shaders
 	GL_CALL(m_basicPyramid3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/pyramid-frag.glsl"));
@@ -81,6 +84,7 @@ Geodash3::Engine::Engine()
 	GL_CALL(m_blocks[1] = TextureObj("res/textures/block2.png"));	
 	GL_CALL(m_blocks[2] = TextureObj("res/textures/block3.png"));	
 	GL_CALL(m_spike = TextureObj("res/textures/spike.png"));
+	GL_CALL(m_crosshair = TextureObj("res/textures/crosshair.png"));
 
 	//Set up the texture coordinates
 	//Cube texture coordinates	
@@ -89,6 +93,9 @@ Geodash3::Engine::Engine()
 	//Pyramid texture coordinates	
 	GL_CALL(m_pyrCoords.GenBuffer());
 	GL_CALL(m_pyrCoords.Data(&Geodash3::texPyrCoords[0], sizeof(Geodash3::texPyrCoords), 2));
+	//Rectangle texture coordinates
+	GL_CALL(m_rectCoords.GenBuffer());
+	GL_CALL(m_rectCoords.Data(&Geodash3::texRectCoords[0], sizeof(Geodash3::texRectCoords), 2));
 
 	//Set up the user input
 	//Set up key input

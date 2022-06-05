@@ -121,6 +121,17 @@ void Geodash3::Engine::m_Display()
 		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 18));
 	}
 
+	//Draw the crosshair
+	GL_CALL(glFrontFace(GL_CW));
+	GL_CALL(this->m_crosshair.ActivateTexture(GL_TEXTURE0));
+	GL_CALL(glUseProgram(this->m_basic3D.GetId()));
+	GL_CALL(this->m_rectCoords.Enable());
+	m_modelViewMat = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -0.12f)) *  
+					 glm::scale(glm::mat4(1.0f), glm::vec3(0.0015f, 0.0015f, 1.0f));
+	GL_CALL(glUniformMatrix4fv(m_basic3D.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));
+	GL_CALL(this->m_rect.Enable());
+	GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 6));
+
 	//GLFW stuff
 	glfwSwapBuffers(m_gameWindow);
 	glfwPollEvents();

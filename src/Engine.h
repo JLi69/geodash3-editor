@@ -61,16 +61,19 @@ namespace Geodash3
 
 		//Vertex buffers
 		VertexBufferObj m_cube = VertexBufferObj(), //Cube object
-						m_pyramid = VertexBufferObj(); //Pyramid Object
+						m_pyramid = VertexBufferObj(), //Pyramid Object
+						m_rect = VertexBufferObj(); //Rectangle object 
 		
 		//Textures
 		TextureObj m_ground, 
 				   m_blocks[3],
-				   m_spike;
+				   m_spike,
+				   m_crosshair;
 
 		//Texture coordinates
 		TextureCoords m_cubeCoords,
-					  m_pyrCoords;
+					  m_pyrCoords,
+					  m_rectCoords;
 	
 		//Shaders
 		Shader m_basic3D, //Basic cube shader

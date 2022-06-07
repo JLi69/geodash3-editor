@@ -1,11 +1,12 @@
 #include "Engine.h"
+#include <map>
 
 void Geodash3::Engine::m_HandleMouseInput(GLFWwindow* win, int button, int action, int scancode)
 {
 	if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{
 		//Interact with buttons on the pause menu
-		if(this->m_paused)
+		if(this->m_paused && !this->m_help)
 		{
 			if(this->m_saveButton.MouseHovering(this->m_gameWindow, this->m_mouseX, this->m_mouseY))
 				this->m_saveButton.Click();
@@ -18,11 +19,18 @@ void Geodash3::Engine::m_HandleMouseInput(GLFWwindow* win, int button, int actio
 		}
 	}
 
+	//Store which mouse button is currently being held
+	static std::map<int, bool> s_mouseHold;
+	if(action == GLFW_PRESS)
+		s_mouseHold[button] = true;
+	else if(action == GLFW_RELEASE)
+		s_mouseHold[button] = false;
+
 	if(this->m_editMode == Geodash3::Mode::NORMAL)
 		return;
 
 	//Destroy a block
-	if(button == GLFW_MOUSE_BUTTON_LEFT)
+	if(s_mouseHold[GLFW_MOUSE_BUTTON_LEFT])
 	{
 		//Go through all the blocks and look for the block the user highlighted
 		for(auto it = this->m_level.blocks.begin(); it != this->m_level.blocks.end(); it++)
@@ -44,7 +52,7 @@ void Geodash3::Engine::m_HandleMouseInput(GLFWwindow* win, int button, int actio
 		}
 	}
 	//Place a block
-	else if(button == GLFW_MOUSE_BUTTON_RIGHT)
+	else if(s_mouseHold[GLFW_MOUSE_BUTTON_RIGHT])
 	{
 		//make sure that there is not an object in the current location
 		bool canPlace = true;

@@ -3,25 +3,17 @@
 
 void Geodash3::Engine::m_Update()
 {
-	//Rotate the preview
-	this->m_previewRotation += 1.35f * this->m_secondsToDrawFrame;
-
-	//Update the camera
-	this->m_camera.position += this->m_camera.movement * this->m_secondsToDrawFrame;
-	//Rotate the camera
-	this->m_camera.rotation.y += this->m_cameraRotationSpeed * this->m_secondsToDrawFrame;
-	this->m_camera.rotation.x += this->m_cameraPitchSpeed * this->m_secondsToDrawFrame;
 	//Rotate camera based on mouse position
 	double tempMouseX, tempMouseY;
 	glfwGetCursorPos(this->m_gameWindow, &tempMouseX, &tempMouseY);
 	if(glfwGetInputMode(this->m_gameWindow, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
 	{
 #ifndef WINDOWS
-		this->m_cameraRotationSpeed = 0.1f * (float)(tempMouseX - this->m_mouseX);
-		this->m_cameraPitchSpeed = -0.1f * (float)(tempMouseY - this->m_mouseY);
+		this->m_cameraRotationSpeed = 0.1f * (float)floorf(tempMouseX - this->m_mouseX);
+		this->m_cameraPitchSpeed = -0.1f * (float)floorf(tempMouseY - this->m_mouseY);
 #else
-		this->m_cameraRotationSpeed = 0.8f * (float)(tempMouseX - this->m_mouseX);
-		this->m_cameraPitchSpeed = -0.8f * (float)(tempMouseY - this->m_mouseY);
+		this->m_cameraRotationSpeed = 1.6f * (float)(tempMouseX - this->m_mouseX);
+		this->m_cameraPitchSpeed = -1.6f * (float)(tempMouseY - this->m_mouseY);
 #endif
 
 		if(this->m_camera.rotation.x < -3.14159f / 2.0f)
@@ -34,9 +26,28 @@ void Geodash3::Engine::m_Update()
 		this->m_cameraRotationSpeed = 0.0f;
 		this->m_cameraPitchSpeed = 0.0f;
 	}
+
 	//Set the mouse position
 	this->m_mouseX = tempMouseX;
 	this->m_mouseY = tempMouseY;
+
+	//Check if it is paused
+	//If it is, don't update the scene
+	if(this->m_paused)
+	{
+		this->m_cameraPitchSpeed = 0.0f;
+		this->m_cameraRotationSpeed = 0.0f;
+		return;
+	}
+
+	//Rotate the preview
+	this->m_previewRotation += 1.35f * this->m_secondsToDrawFrame;
+
+	//Update the camera
+	this->m_camera.position += this->m_camera.movement * this->m_secondsToDrawFrame;
+	//Rotate the camera
+	this->m_camera.rotation.y += this->m_cameraRotationSpeed * this->m_secondsToDrawFrame;
+	this->m_camera.rotation.x += this->m_cameraPitchSpeed * this->m_secondsToDrawFrame;
 
 	//Camera boundaries
 	if(this->m_camera.position.x < -1.0f)

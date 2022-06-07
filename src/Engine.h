@@ -7,6 +7,7 @@
 #include "GL-Utils/VertexBufferObj.h"
 #include "GL-Utils/Texture-Utils/TextureObj.h"
 #include "GL-Utils/Texture-Utils/TextureCoords.h"
+#include "Button/Button.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -45,40 +46,45 @@ namespace Geodash3
 		glm::mat4 m_rotationMatrix = glm::rotate(glm::mat4(1.0f), 0.0f * 3.14159f / 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		//Preallocated model view matrix
 		glm::mat4 m_modelViewMat;
-
+		//Current edit mode
 		Geodash3::Mode m_editMode = Geodash3::Mode::NORMAL;
 		//Camera
 		Geodash3::GameObject m_camera;
 		float m_cameraRotationSpeed = 0.0f,
 			  m_cameraPitchSpeed = 0.0f;	
 		//Mouse position
-		double m_mouseX, m_mouseY;
+		double m_mouseX = 0.0f, m_mouseY = 0.0f;
 		//Highlighted cube
 		glm::vec3 m_highlighted;
 
 		//Game window
 		GLFWwindow *m_gameWindow;
 
+		//Buttons
+		Geodash3::Button m_helpButton,
+						 m_saveButton,
+						 m_saveQuitButton;
+
 		//Vertex buffers
 		VertexBufferObj m_cube = VertexBufferObj(), //Cube object
 						m_pyramid = VertexBufferObj(), //Pyramid Object
-						m_rect = VertexBufferObj(); //Rectangle object 
-		
+						m_rect = VertexBufferObj(); //Rectangle object 	
 		//Textures
 		TextureObj m_ground, 
 				   m_blocks[3],
 				   m_spike,
-				   m_crosshair;
-
+				   m_crosshair,
+				   m_pauseScreen,
+				   m_helpScreen;
 		//Texture coordinates
 		TextureCoords m_cubeCoords,
 					  m_pyrCoords,
-					  m_rectCoords;
-	
+					  m_rectCoords;	
 		//Shaders
 		Shader m_basic3D, //Basic cube shader
 			   m_basicPyramid3D, //Basic pyramid shader
-			   m_white; //Just color a model white
+			   m_white, //Just color a model white
+			   m_button; //Button shader
 
 		//Game objects
 		//Level
@@ -87,13 +93,14 @@ namespace Geodash3
 	
 		float m_secondsToDrawFrame = 1.0f, //Number of seconds to draw the frame
 			  m_previewRotation = 0.0f; //Rotation of a preview block
+		//Editor is paused
+		bool m_paused = false, 
+			 m_help = false; //On help screen
 
 		//Handle key input
-		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);
-		
+		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);	
 		//Handle mouse input
 		void m_HandleMouseInput(GLFWwindow* win, int button, int action, int mods);
-
 		//Handle mouse scroll
 		int m_currentBlockType = BLOCK1;
 		void m_HandleScrollInput(GLFWwindow* win, double xoffset, double yoffset);

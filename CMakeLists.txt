@@ -30,6 +30,9 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/GL-Utils/Texture-Utils/TextureCoords.cpp
 	${PROJECT_SOURCE_DIR}/src/GL-Utils/Texture-Utils/TextureObj.cpp
 
+	#Button
+	${PROJECT_SOURCE_DIR}/src/Button/Button.cpp
+
 	#init
 	${PROJECT_SOURCE_DIR}/src/Init/init.cpp
 	

@@ -58,6 +58,9 @@ void Geodash3::Engine::m_HandleKeyInput(GLFWwindow* win, int key, int scancode, 
 	{
 		int mode = glfwGetInputMode(this->m_gameWindow, GLFW_CURSOR) == GLFW_CURSOR_DISABLED ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED;
 		glfwSetInputMode(this->m_gameWindow, GLFW_CURSOR, mode);
+		this->m_paused = !this->m_paused;
+		this->m_help = false;	
+		this->m_editMode = Geodash3::Mode::NORMAL;
 	}
 
 	//Change edit mode

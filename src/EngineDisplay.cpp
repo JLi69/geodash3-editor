@@ -94,7 +94,7 @@ void Geodash3::Engine::m_Display()
 	}
 
 	//Display the preview block
-	m_modelViewMat = glm::translate(glm::mat4(1.0f), glm::vec3(-0.085f, -0.045f, -0.12f)) *
+	m_modelViewMat = glm::translate(glm::mat4(1.0f), glm::vec3(-0.085f, -0.045f, -0.13f)) *
 					 glm::rotate(glm::mat4(1.0f), this->m_previewRotation, glm::vec3(0.0f, 1.0f, 0.0f)) *  
 					 m_viewMatrix * 
 				  	 glm::scale(glm::mat4(1.0f), glm::vec3(0.005f, 0.005f, 0.005f));
@@ -132,6 +132,47 @@ void Geodash3::Engine::m_Display()
 	GL_CALL(this->m_rect.Enable());
 	GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 6));
 
+	if(this->m_help)
+	{	
+		GL_CALL(this->m_helpScreen.ActivateTexture(GL_TEXTURE0));
+		m_modelViewMat = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -0.12f)) *  
+					 glm::scale(glm::mat4(1.0f), glm::vec3(0.12f, 0.12 * 1080.0f / 1920.0f, 1.0f));
+		GL_CALL(glUniformMatrix4fv(m_basic3D.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));
+		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 6));
+	}
+	//Draw the pause screen
+	else if(this->m_paused)
+	{
+		GL_CALL(this->m_pauseScreen.ActivateTexture(GL_TEXTURE0));
+		m_modelViewMat = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -0.12f)) *  
+					 glm::scale(glm::mat4(1.0f), glm::vec3(0.12f, 0.0675f, 1.0f));
+		GL_CALL(glUniformMatrix4fv(m_basic3D.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));
+		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 6));
+
+		//Draw the buttons
+		GL_CALL(glUseProgram(this->m_button.GetId()));
+		GL_CALL(glUniformMatrix4fv(this->m_button.GetUniformLocation("u_PerspectiveMat"), 1, false, glm::value_ptr(this->m_perspectiveMat)));
+
+		//Save button
+		GL_CALL(this->m_saveButton.ActivateButtonTex());
+		this->m_saveButton.SetModelViewMat(this->m_modelViewMat);
+		GL_CALL(glUniformMatrix4fv(m_button.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));	
+		GL_CALL(glUniform1i(m_button.GetUniformLocation("u_hovering"), this->m_saveButton.MouseHovering(this->m_gameWindow, this->m_mouseX, this->m_mouseY)));	
+		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 6));
+		//Save & quit	
+		GL_CALL(this->m_saveQuitButton.ActivateButtonTex());
+		this->m_saveQuitButton.SetModelViewMat(this->m_modelViewMat);
+		GL_CALL(glUniformMatrix4fv(m_button.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));	
+		GL_CALL(glUniform1i(m_button.GetUniformLocation("u_hovering"), this->m_saveQuitButton.MouseHovering(this->m_gameWindow, this->m_mouseX, this->m_mouseY)));	
+		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 6));
+		//Pull up help menu	
+		GL_CALL(this->m_helpButton.ActivateButtonTex());
+		this->m_helpButton.SetModelViewMat(this->m_modelViewMat);
+		GL_CALL(glUniformMatrix4fv(m_button.GetUniformLocation("u_ModelViewMat"), 1, false, glm::value_ptr(m_modelViewMat)));	
+		GL_CALL(glUniform1i(m_button.GetUniformLocation("u_hovering"), this->m_helpButton.MouseHovering(this->m_gameWindow, this->m_mouseX, this->m_mouseY)));	
+		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 6));
+	}
+	
 	//GLFW stuff
 	glfwSwapBuffers(m_gameWindow);
 	glfwPollEvents();

@@ -35,7 +35,7 @@ void Geodash3::Engine::Run()
 		//Calculate number of seconds to draw the frame
 		std::chrono::duration<float> timePassed = end - begin;
 		this->m_secondsToDrawFrame = timePassed.count();
-		
+
 		//Calculate the average FPS
 		frameCount++;
 		if(frameCount != 1.0f)
@@ -77,7 +77,8 @@ Geodash3::Engine::Engine()
 	GL_CALL(m_basicPyramid3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/pyramid-frag.glsl"));
 	GL_CALL(m_basic3D.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/basic-frag.glsl"));
 	GL_CALL(m_white.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/white.glsl"));
-
+	GL_CALL(m_button.CreateShader("res/shaders/vert-3d.glsl", "res/shaders/button-frag.glsl"));
+	
 	//Set up the textures
 	GL_CALL(m_ground = TextureObj("res/textures/ground.png"));
 	GL_CALL(m_blocks[0] = TextureObj("res/textures/block1.png"));
@@ -85,6 +86,8 @@ Geodash3::Engine::Engine()
 	GL_CALL(m_blocks[2] = TextureObj("res/textures/block3.png"));	
 	GL_CALL(m_spike = TextureObj("res/textures/spike.png"));
 	GL_CALL(m_crosshair = TextureObj("res/textures/crosshair.png"));
+	GL_CALL(m_pauseScreen = TextureObj("res/textures/pause.png"));
+	GL_CALL(m_helpScreen = TextureObj("res/textures/geodash3-editor-credits.png"));
 
 	//Set up the texture coordinates
 	//Cube texture coordinates	
@@ -96,6 +99,19 @@ Geodash3::Engine::Engine()
 	//Rectangle texture coordinates
 	GL_CALL(m_rectCoords.GenBuffer());
 	GL_CALL(m_rectCoords.Data(&Geodash3::texRectCoords[0], sizeof(Geodash3::texRectCoords), 2));
+
+	//Set up the buttons
+	//Save button
+	this->m_saveButton = Geodash3::Button([this]() { this->Write(); }, glm::vec2(0.0f, -0.005f), glm::vec2(0.15f * 0.11f, 0.06f * 0.11f));
+	GL_CALL(this->m_saveButton.SetButtonTex("res/textures/savebutton.png"));
+	//Save & quit button	
+	this->m_saveQuitButton = Geodash3::Button([this]() { this->Write(); glfwTerminate(); exit(0); }, glm::vec2(0.0f, -0.02f), glm::vec2(0.15f * 0.11f, 0.06f * 0.11f));
+	GL_CALL(this->m_saveQuitButton.SetButtonTex("res/textures/save-and-quitbutton.png"));	
+	//Button to pull up the help screen
+	
+	//Display the help function
+	this->m_helpButton = Geodash3::Button([this](){ this->m_help = true; }, glm::vec2(0.0f, -0.035f), glm::vec2(0.15f * 0.11f, 0.06f * 0.11f));
+	GL_CALL(this->m_helpButton.SetButtonTex("res/textures/helpbutton.png"));
 
 	//Set up the user input
 	//Set up key input
@@ -124,8 +140,9 @@ Geodash3::Engine::Engine()
 	this->m_camera.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	//Hide cursor
-	glfwSetInputMode(this->m_gameWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPos(this->m_gameWindow, 0.0f, 0.0f);
 	glfwGetCursorPos(this->m_gameWindow, &this->m_mouseX, &this->m_mouseY);
+	glfwSetInputMode(this->m_gameWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	//Generate a random path for the file
 	std::stringstream randPath;	

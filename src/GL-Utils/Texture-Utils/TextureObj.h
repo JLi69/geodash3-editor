@@ -1,3 +1,4 @@
+#define TEXTUREOBJ_INCLUDE
 #ifndef INCLUDE_GLAD
 #include <glad/glad.h>
 #endif

@@ -87,8 +87,7 @@ namespace Geodash3
 			   m_button; //Button shader
 
 		//Game objects
-		//Level
-		int m_currentLevel = 0;
+		//Level	
 		Geodash3::Level m_level; //Level being edited
 	
 		float m_secondsToDrawFrame = 1.0f, //Number of seconds to draw the frame

@@ -28,7 +28,8 @@ void Geodash3::Engine::m_Display()
 	GL_CALL(glUniform4f(m_basic3D.GetUniformLocation("u_Color"), 0.0f, 1.0f, 0.0f, 1.0f));
 	GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));	
 
-	//Display the block	
+	//Display the block
+	static short int s_currentBlockType = -1;
 	for(auto block : this->m_level.blocks)
 	{
 		if((block.position.x + this->m_camera.position.x) * (block.position.x + this->m_camera.position.x) +
@@ -36,8 +37,13 @@ void Geodash3::Engine::m_Display()
 			(block.position.z + this->m_camera.position.z) * (block.position.z + this->m_camera.position.z) > 64.0f * 64.0f)
 			continue;	
 
-		GL_CALL(m_blocks[block.blockType].ActivateTexture(GL_TEXTURE0));
-		
+		//Don't change the texture of the previous texture was different
+		if(block.blockType != s_currentBlockType)
+		{
+			s_currentBlockType = block.blockType;
+			GL_CALL(m_blocks[block.blockType].ActivateTexture(GL_TEXTURE0));
+		}	
+
 		m_modelViewMat = m_rotationMatrix *
 						 glm::rotate(glm::mat4(1.0f), -this->m_camera.rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)) * 
 						 glm::rotate(glm::mat4(1.0f), this->m_camera.rotation.y, glm::vec3(0.0f, 1.0f, 0.0f)) * 
@@ -53,6 +59,7 @@ void Geodash3::Engine::m_Display()
 		GL_CALL(glUniform4f(m_basic3D.GetUniformLocation("u_Color"), 0.6f, 0.6f, 0.6f, 1.0f));
 		GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));
 	}
+	s_currentBlockType = -1;
 
 	//Display the spikes
 	GL_CALL(m_pyrCoords.Enable());

@@ -3,6 +3,9 @@
 
 void Geodash3::Engine::m_HandleMouseInput(GLFWwindow* win, int button, int action, int scancode)
 {
+	//Store which mouse button is currently being held
+	static std::map<int, bool> s_mouseHold;
+
 	if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{
 		//Interact with buttons on the pause menu
@@ -19,8 +22,6 @@ void Geodash3::Engine::m_HandleMouseInput(GLFWwindow* win, int button, int actio
 		}
 	}
 
-	//Store which mouse button is currently being held
-	static std::map<int, bool> s_mouseHold;
 	if(action == GLFW_PRESS)
 		s_mouseHold[button] = true;
 	else if(action == GLFW_RELEASE)

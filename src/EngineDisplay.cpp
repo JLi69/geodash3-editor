@@ -29,6 +29,7 @@ void Geodash3::Engine::m_Display()
 	GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 36));	
 
 	//Display the block
+	GL_CALL(this->m_cubeCoordsTop.Enable());
 	static short int s_currentBlockType = -1;
 	for(auto block : this->m_level.blocks)
 	{
@@ -118,7 +119,7 @@ void Geodash3::Engine::m_Display()
 	
 	if(this->m_currentBlockType != SPIKE)
 	{
-		GL_CALL(this->m_cubeCoords.Enable());
+		GL_CALL(this->m_cubeCoordsTop.Enable());
 		GL_CALL(this->m_blocks[this->m_currentBlockType].ActivateTexture(GL_TEXTURE0));
 
 		GL_CALL(glFrontFace(GL_CW));

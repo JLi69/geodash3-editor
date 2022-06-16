@@ -93,6 +93,9 @@ Geodash3::Engine::Engine()
 	//Cube texture coordinates	
 	GL_CALL(m_cubeCoords.GenBuffer());
 	GL_CALL(m_cubeCoords.Data(&Geodash3::texCubeCoords[0], sizeof(Geodash3::texCubeCoords), 2));
+	//Cube texture coordinates	
+	GL_CALL(m_cubeCoordsTop.GenBuffer());
+	GL_CALL(m_cubeCoordsTop.Data(&Geodash3::texCubeCoordsTop[0], sizeof(Geodash3::texCubeCoordsTop), 2));	
 	//Pyramid texture coordinates	
 	GL_CALL(m_pyrCoords.GenBuffer());
 	GL_CALL(m_pyrCoords.Data(&Geodash3::texPyrCoords[0], sizeof(Geodash3::texPyrCoords), 2));

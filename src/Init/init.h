@@ -65,6 +65,28 @@ namespace Geodash3
 		 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f 
 	};
 
+	//Texture coordinates for cube but top face and bottom face are different
+	const float texCubeCoordsTop[72] = 
+	{
+		0.5f, 1.0f, 0.5f, 0.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f, 0.5f, 1.0f,
+
+		0.5f, 0.0f, 0.0f, 0.0f, 0.5f, 1.0f,
+		0.0f, 0.0f, 0.0f, 1.0f, 0.5f, 1.0f,
+		 
+		0.5f, 0.0f, 0.0f, 0.0f, 0.5f, 1.0f,
+		0.0f, 0.0f, 0.0f, 1.0f, 0.5f, 1.0f,
+		 
+		0.5f, 0.0f, 0.0f, 0.0f, 0.5f, 1.0f,
+		0.0f, 0.0f, 0.0f, 1.0f, 0.5f, 1.0f,
+		 
+		1.0f, 1.0f, 1.0f, 0.0f, 0.5f, 0.0f,
+		0.5f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f,
+		 
+		0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+		1.0f, 0.0f, 0.5f, 0.0f, 0.5f, 1.0f	
+	};
+
 	//Texture coordinates for a pyramid
 	const float texPyrCoords[36] =
 	{

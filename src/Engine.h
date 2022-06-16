@@ -78,6 +78,7 @@ namespace Geodash3
 				   m_helpScreen;
 		//Texture coordinates
 		TextureCoords m_cubeCoords,
+					  m_cubeCoordsTop,
 					  m_pyrCoords,
 					  m_rectCoords;	
 		//Shaders

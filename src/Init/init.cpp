@@ -7,7 +7,7 @@ void Geodash3::init(GLFWwindow *&win, const char *title, GLFWwindowsizefun onWin
 	if(!glfwInit())
 		exit(-1);
 
-	win = glfwCreateWindow(1200, 660, title, NULL, NULL);
+	win = glfwCreateWindow(1200, 675, title, NULL, NULL);
 	if(!win)
 	{
 		glfwTerminate();

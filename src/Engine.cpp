@@ -56,7 +56,21 @@ Geodash3::Engine::Engine()
 	//When the window gets resized, do this
 	auto onWinResizeFunc = [](GLFWwindow *win, int newWidth, int newHeight)
 	{
-		glViewport(0, 0, newWidth, newHeight);	
+		//Preserve the aspect ratio
+		if((float)newWidth < (float)newHeight * 1920.0f / 1080.0f)
+		{			
+			GL_CALL(glViewport(0, newHeight / 2 - int(float(newWidth) * 1080.0f / 1920.0f * 0.5f), newWidth, int(float(newWidth) * 1080.0f / 1920.0f)));
+		}	
+		else
+		{	
+			GL_CALL(glViewport(newWidth / 2 - int(float(newHeight) * 1920.0f / 1080.0f * 0.5f), 0, int(float(newHeight) * 1920.0f / 1080.0f), newHeight));	
+		}
+
+		//Fill up whole screen if maximized
+		if(glfwGetWindowAttrib(win, GLFW_MAXIMIZED))
+		{
+			GL_CALL(glViewport(0, 0, newWidth, newHeight));
+		}	
 	};
 
 	//Initialize everything

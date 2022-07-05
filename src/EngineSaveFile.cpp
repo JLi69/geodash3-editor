@@ -23,7 +23,7 @@ void Geodash3::Engine::Write()
 			tempY = (int)((block.position.y + 1.75f) / 0.5f) * -1 + 11;
 
 		//Characters to represent the different types of blocks
-		char blockChars[] = { '#', '$', '%' };
+		char blockChars[] = { '#', '$', '%', '&' };
 
 		objects[tempX * 12 + tempY].push_back({ block.position, blockChars[block.blockType] });		
 	}

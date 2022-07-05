@@ -1,7 +1,6 @@
 #define INCLUDE_GLAD
 #include <glad/glad.h>
 
-#include "Init/init.h"
 #include "GL-Utils/GetOpenGLError.h"
 #include "GL-Utils/Shader.h"
 #include "GL-Utils/VertexBufferObj.h"
@@ -24,7 +23,8 @@
 #define BLOCK1 0
 #define BLOCK2 1
 #define BLOCK3 2
-#define SPIKE 3
+#define BLOCK4 3
+#define SPIKE 4
 
 namespace Geodash3
 {
@@ -71,7 +71,7 @@ namespace Geodash3
 						m_rect = VertexBufferObj(); //Rectangle object 	
 		//Textures
 		TextureObj m_ground, 
-				   m_blocks[3],
+				   m_blocks[4],
 				   m_spike,
 				   m_crosshair,
 				   m_pauseScreen,
@@ -99,11 +99,15 @@ namespace Geodash3
 
 		//Handle key input
 		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);	
-		//Handle mouse input
+		//Handle mouse input	
+		//Store which mouse button is currently being held
+		std::map<int, bool> mouseHold;	
 		void m_HandleMouseInput(GLFWwindow* win, int button, int action, int mods);
 		//Handle mouse scroll
 		int m_currentBlockType = BLOCK1;
 		void m_HandleScrollInput(GLFWwindow* win, double xoffset, double yoffset);
+		//Handle window resizing
+		void m_OnWindowResize(GLFWwindow *win, int newWidth, int newHeight);	
 
 		//Save and open files
 		std::string m_path; //Path to the save file

@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "Init/init.h"
 #include <chrono>
 #include <iostream>
 #include <fstream>
@@ -53,28 +54,8 @@ void Geodash3::Engine::Run()
 //Constructor
 Geodash3::Engine::Engine()
 {
-	//When the window gets resized, do this
-	auto onWinResizeFunc = [](GLFWwindow *win, int newWidth, int newHeight)
-	{
-		//Preserve the aspect ratio
-		if((float)newWidth < (float)newHeight * 1920.0f / 1080.0f)
-		{			
-			GL_CALL(glViewport(0, newHeight / 2 - int(float(newWidth) * 1080.0f / 1920.0f * 0.5f), newWidth, int(float(newWidth) * 1080.0f / 1920.0f)));
-		}	
-		else
-		{	
-			GL_CALL(glViewport(newWidth / 2 - int(float(newHeight) * 1920.0f / 1080.0f * 0.5f), 0, int(float(newHeight) * 1920.0f / 1080.0f), newHeight));	
-		}
-
-		//Fill up whole screen if maximized
-		if(glfwGetWindowAttrib(win, GLFW_MAXIMIZED))
-		{
-			GL_CALL(glViewport(0, 0, newWidth, newHeight));
-		}	
-	};
-
 	//Initialize everything
-	Geodash3::init(this->m_gameWindow, "Geodash 3D Level Editor", onWinResizeFunc);	
+	Geodash3::init(this->m_gameWindow, "Geodash 3D Level Editor");	
 
 	//Set up the vertex buffers
 	//Cube	
@@ -98,6 +79,7 @@ Geodash3::Engine::Engine()
 	GL_CALL(m_blocks[0] = TextureObj("res/textures/block1.png"));
 	GL_CALL(m_blocks[1] = TextureObj("res/textures/block2.png"));	
 	GL_CALL(m_blocks[2] = TextureObj("res/textures/block3.png"));	
+	GL_CALL(m_blocks[3] = TextureObj("res/textures/block4.png"));	
 	GL_CALL(m_spike = TextureObj("res/textures/spike.png"));
 	GL_CALL(m_crosshair = TextureObj("res/textures/crosshair.png"));
 	GL_CALL(m_pauseScreen = TextureObj("res/textures/pause.png"));
@@ -150,6 +132,13 @@ Geodash3::Engine::Engine()
 		static_cast<Engine*>(glfwGetWindowUserPointer(win))->m_HandleScrollInput(win, xoffset, yoffset);	
 	};
 	glfwSetScrollCallback(this->m_gameWindow, scrollInputFunc);
+	//Set up window resizing
+	//When the window gets resized, do this
+	auto onWinResizeFunc = [](GLFWwindow *win, int newWidth, int newHeight)
+	{
+		static_cast<Engine*>(glfwGetWindowUserPointer(win))->m_OnWindowResize(win, newWidth, newHeight);				
+	};
+	glfwSetWindowSizeCallback(this->m_gameWindow, onWinResizeFunc);
 
 	//Set up the camera
 	this->m_camera.position = glm::vec3(0.0f, 0.0f, 0.0f);

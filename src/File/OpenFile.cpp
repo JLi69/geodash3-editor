@@ -16,14 +16,14 @@ std::ifstream Geodash3::OpenFile(std::string path, bool &success)
 		std::stringstream newPath;
 		//get user's home directory	
 		const char* home = getenv("HOME");
-		newPath << home << "/.config/geodash3-editor/" << path;
+		newPath << home << "/.geodash3/" << path;
 		file = std::ifstream(newPath.str());
 	}
 	//If you still can't find it, then try to look in etc/geodash3
 	if(!file.is_open())
 	{
 		std::stringstream newPath;
-		newPath << "/etc/geodash3-editor/" << path;
+		newPath << "/usr/share/games/geodash3/" << path;
 		file = std::ifstream(newPath.str());
 	}
 #endif

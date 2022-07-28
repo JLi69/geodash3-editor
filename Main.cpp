@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
 	{
 	//No arguments
 	case 1:
+		gameEngine.Menu();	
 		gameEngine.Run();
 		break;
 	//One argument: the name of the file that the program will

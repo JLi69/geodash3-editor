@@ -83,7 +83,7 @@ Geodash3::Engine::Engine()
 	GL_CALL(m_spike = TextureObj("res/textures/spike.png"));
 	GL_CALL(m_crosshair = TextureObj("res/textures/crosshair.png"));
 	GL_CALL(m_pauseScreen = TextureObj("res/textures/pause.png"));
-	GL_CALL(m_helpScreen = TextureObj("res/textures/geodash3-editor-credits.png"));
+	GL_CALL(m_helpScreen = TextureObj("res/textures/geodash3-editor-credits.png"));	
 
 	//Set up the texture coordinates
 	//Cube texture coordinates	
@@ -106,11 +106,29 @@ Geodash3::Engine::Engine()
 	//Save & quit button	
 	this->m_saveQuitButton = Geodash3::Button([this]() { this->Write(); glfwTerminate(); exit(0); }, glm::vec2(0.0f, -0.02f), glm::vec2(0.15f * 0.11f, 0.06f * 0.11f));
 	GL_CALL(this->m_saveQuitButton.SetButtonTex("res/textures/save-and-quitbutton.png"));	
-	//Button to pull up the help screen
-	
+	//Button to pull up the help screen	
 	//Display the help function
 	this->m_helpButton = Geodash3::Button([this](){ this->m_help = true; }, glm::vec2(0.0f, -0.035f), glm::vec2(0.15f * 0.11f, 0.06f * 0.11f));
 	GL_CALL(this->m_helpButton.SetButtonTex("res/textures/helpbutton.png"));
+
+	//Menu buttons
+	m_editButton = Geodash3::Button([this](){ this->m_menu = false; }, glm::vec2(-0.0f, -0.04f), glm::vec2(0.15f * 0.11f, 0.06f * 0.11f));
+	GL_CALL(m_editButton.SetButtonTex("res/textures/editbutton.png"));
+	auto changeLevel = [this](int amount)
+	{
+		this->m_pathIndex += amount;
+		this->m_pathIndex += this->m_levelPaths.size();
+		this->m_pathIndex %= this->m_levelPaths.size();
+		bool success;
+		this->m_level = Geodash3::LoadLevel(this->m_levelPaths.at(this->m_pathIndex), success);
+		if(!success)
+			std::cout << "Failed to open file: " << this->m_levelPaths.at(this->m_pathIndex) << '\n';
+		this->m_path = this->m_levelPaths.at(this->m_pathIndex);
+	};
+	m_nextButton = Geodash3::Button([this, changeLevel](){ changeLevel(1); }, glm::vec2(0.04f, -0.04f), glm::vec2(0.03f * 0.11f, 0.06f * 0.11f));
+	GL_CALL(m_nextButton.SetButtonTex("res/textures/nextbutton.png"));	
+	m_prevButton = Geodash3::Button([this, changeLevel](){ changeLevel(-1); }, glm::vec2(-0.04f, -0.04f), glm::vec2(0.03f * 0.11f, 0.06f * 0.11f));
+	GL_CALL(m_prevButton.SetButtonTex("res/textures/prevbutton.png"));
 
 	//Set up the user input
 	//Set up key input
@@ -150,10 +168,10 @@ Geodash3::Engine::Engine()
 	glfwGetCursorPos(this->m_gameWindow, &this->m_mouseX, &this->m_mouseY);
 	glfwSetInputMode(this->m_gameWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	//Generate a random path for the file
+	//Generate a random path for the file	
 	std::stringstream randPath;	
 	srand(time(NULL)); //Generate seed
-	randPath << "custom-";	
+	randPath << "saves/custom-";	
 	for(int i = 0; i < 16; i++)
 		randPath << (char)(rand() % ((int)('z' - 'a') + 1) + (int)'a');
 	randPath << ".lvl";

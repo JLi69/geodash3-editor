@@ -1,6 +1,3 @@
-#define INCLUDE_GLAD
-#include <glad/glad.h>
-
 #include "GL-Utils/GetOpenGLError.h"
 #include "GL-Utils/Shader.h"
 #include "GL-Utils/VertexBufferObj.h"
@@ -64,6 +61,10 @@ namespace Geodash3
 		Geodash3::Button m_helpButton,
 						 m_saveButton,
 						 m_saveQuitButton;
+		//Menu buttons
+		Geodash3::Button m_editButton,
+						 m_nextButton,
+						 m_prevButton;
 
 		//Vertex buffers
 		VertexBufferObj m_cube = VertexBufferObj(), //Cube object
@@ -75,7 +76,7 @@ namespace Geodash3
 				   m_spike,
 				   m_crosshair,
 				   m_pauseScreen,
-				   m_helpScreen;
+				   m_helpScreen; 
 		//Texture coordinates
 		TextureCoords m_cubeCoords,
 					  m_cubeCoordsTop,
@@ -90,12 +91,16 @@ namespace Geodash3
 		//Game objects
 		//Level	
 		Geodash3::Level m_level; //Level being edited
-	
+		//List of level file paths
+		std::vector<std::string> m_levelPaths;
+		int m_pathIndex = 0;
+
 		float m_secondsToDrawFrame = 1.0f, //Number of seconds to draw the frame
 			  m_previewRotation = 0.0f; //Rotation of a preview block
 		//Editor is paused
 		bool m_paused = false, 
-			 m_help = false; //On help screen
+			 m_help = false, //On help screen
+			 m_menu = false; //On menu screen
 
 		//Handle key input
 		void m_HandleKeyInput(GLFWwindow* win, int key, int scancode, int action, int mods);	
@@ -119,6 +124,9 @@ namespace Geodash3
 	public:
 		//Run the main game loop
 		void Run();
+
+		//Draw the menu to select a level to edit
+		void Menu();
 
 		bool Read(std::string path); //Read from a save file
 									 //returns true if successful,

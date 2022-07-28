@@ -49,6 +49,7 @@ add_executable(
 	${PROJECT_SOURCE_DIR}/src/EngineUpdate.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineSaveFile.cpp
 	${PROJECT_SOURCE_DIR}/src/EngineOnWinResize.cpp
+	${PROJECT_SOURCE_DIR}/src/EngineMenu.cpp
 
 	#Gameobjects
 	${PROJECT_SOURCE_DIR}/src/GameObject/Block.cpp

@@ -22,8 +22,8 @@ bool Geodash3::Button::MouseHovering(GLFWwindow *win, double mouseX, double mous
 	int winWidth, winHeight;
 	glfwGetWindowSize(win, &winWidth, &winHeight);
 
-	return (float)mouseX / (float)winWidth * 2.0f - 1.0f > this->m_position.x / 0.11f * 2.0f - this->m_dimensions.x / 0.11f &&
-		   (float)mouseX / (float)winWidth * 2.0f - 1.0f < this->m_position.x / 0.11f * 2.0f + this->m_dimensions.x / 0.11f &&
+	return (float)mouseX / (float)winWidth * 2.0f - 1.0f > this->m_position.x / 0.11f - this->m_dimensions.x / 0.11f &&
+		   (float)mouseX / (float)winWidth * 2.0f - 1.0f < this->m_position.x / 0.11f + this->m_dimensions.x / 0.11f &&
 		   ((float)mouseY / (float)winHeight * 2.0f - 1.0f) * -1.0f > this->m_position.y / 0.11f * (float)winWidth / (float)winHeight - this->m_dimensions.y / 0.11f * (float)winWidth / (float)winHeight &&
 		   ((float)mouseY / (float)winHeight * 2.0f - 1.0f) * -1.0f < this->m_position.y / 0.11f * (float)winWidth / (float)winHeight + this->m_dimensions.y / 0.11f * (float)winWidth / (float)winHeight;
 }

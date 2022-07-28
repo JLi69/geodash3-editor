@@ -95,4 +95,23 @@ void Geodash3::Engine::Write()
 	}
 
 	saveFile.close(); //Close the save file
+	
+	//Write to the level path list
+	if(this->m_path != this->m_levelPaths.at(0))
+		return; //Don't write to the path list file if you are not making a new file
+	std::ofstream levelListFile("saves/path-list.txt", std::ios::trunc);	
+	if(!levelListFile.is_open())
+	{
+		std::cout << "Failed to open path-list.txt!\n";
+		levelListFile.close();
+		return;
+	}
+	//Output to the file	
+	if(m_levelPaths.size() != 0)
+	{
+		for(auto path : m_levelPaths)
+			levelListFile << path << '\n';
+	}
+	//Close the file	
+	levelListFile.close();
 }
